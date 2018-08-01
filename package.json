@@ -8,11 +8,15 @@
     "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
+    "inversify": "^4.13.0",
+    "ngrock-webpack-plugin": "0.0.2",
     "node-sass": "^4.9.2",
+    "reflect-metadata": "^0.1.12",
     "sass-loader": "^7.0.3",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.21.0",
     "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
@@ -20,8 +24,11 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
+    "start:live": "webpack-dev-server --progress --port=8080 --hot --inline --config=webpack.config.js",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC"

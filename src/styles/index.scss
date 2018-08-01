@@ -11,5 +11,25 @@ body {
 }
 
 #inputarea {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    right: 0;
 
+    input {
+        width: inherit;
+        font-family: $terminalfont;
+        padding: 0.5em;
+        font-size: 0.9em;
+        background-color: $darkgreen;
+        color: $lightgreen;
+        border-style: solid none none none;
+        border-color: $green;
+        border-width: 1px;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }

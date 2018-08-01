@@ -1,39 +1,61 @@
 import { IOutputHandler } from "../abstract/utils/IOutputHandler";
+import { injectable } from "inversify"
+import { Elements } from "../elements/elements";
 
+@injectable()
 export class OutputHandler implements IOutputHandler {
-    private outputContainer: Element;    
+    private outputElement?: HTMLElement   
     private nextLineTextColor: string = "greenyellow";
     private nextLineBackgroundColor: string = "rgb(0,10,0)";
 
-    constructor(outputContainer: Element) {
-        this.outputContainer = outputContainer
+    constructor() {
+        this.outputElement = Elements.outputElement
     }
 
-    print(text: string): void {
+    public setElement(element: HTMLElement): void {
+        this.outputElement = element
+    }
+
+    public print(text: string): void {
+        if(!this.outputElement) { return }
         let newElement = document.createElement("span")
         newElement.textContent = "> " + text
         newElement.style.color = this.nextLineTextColor
         newElement.style.backgroundColor = this.nextLineBackgroundColor
-        this.outputContainer.appendChild(newElement)
+        this.outputElement.appendChild(newElement)
     }
 
-    setNextLineTextColor(color: string): void {
+    public println(code: number, text: string): void {
+        if(!this.outputElement) { return }
+        let newElement = document.createElement("div")
+        newElement.textContent = `> ${code}: ${text}`
+        newElement.style.color = this.nextLineTextColor
+        newElement.style.backgroundColor = this.nextLineBackgroundColor
+        this.outputElement.appendChild(newElement)
+    }
+
+    public setNextLineTextColor(color: string): void {
+        this.nextLineTextColor = color
+    }
+
+    public setNextLineBackgroundColor(color: string): void {
+        this.nextLineBackgroundColor = color
+    }
+
+    public setContainerTextColor(color: string): void {
         throw new Error("Method not implemented.");
     }
 
-    setNextLineBackgroundColor(color: string): void {
+    public setContainerBackgroundColor(color: string): void {
         throw new Error("Method not implemented.");
     }
 
-    setContainerTextColor(color: string): void {
+    public setNextLineFontSize(size: string): void {
         throw new Error("Method not implemented.");
     }
 
-    setContainerBackgroundColor(color: string): void {
-        throw new Error("Method not implemented.");
-    }
-
-    clear(): void {
-        this.outputContainer.innerHTML = ""
+    public clear(): void {
+        if(!this.outputElement) { return }
+        this.outputElement.innerHTML = ""
     }
 }
