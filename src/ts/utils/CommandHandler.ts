@@ -1,16 +1,16 @@
 import { ICommandHandler } from "../abstract/utils/ICommandHandler";
 import { ICommand } from "../abstract/utils/ICommand";
 import { IOutputHandler } from "../abstract/utils/IOutputHandler";
-import { injectable } from "../../../node_modules/inversify";
-import { container } from "../inversify.config";
-import { TYPES, COLORS } from "../types";
+import { injectable, inject } from "../../../node_modules/inversify";
+import { TYPES } from "../constants/types";
+import { COLORS } from "../constants/Colors";
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
     private outputHandler: IOutputHandler
 
-    constructor() {
-        this.outputHandler = container.get<IOutputHandler>(TYPES.OutputHandler)
+    constructor(@inject(TYPES.OutputHandler) outputHandler: IOutputHandler) {
+        this.outputHandler = outputHandler
     }
 
     public executeCommand(command: ICommand): void {

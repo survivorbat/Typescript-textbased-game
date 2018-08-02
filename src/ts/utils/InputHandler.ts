@@ -1,9 +1,8 @@
 import { IInputHandler } from "../abstract/utils/IInputHandler";
 import { ICommand } from "../abstract/utils/ICommand";
-import { injectable } from "../../../node_modules/inversify";
+import { injectable, inject } from "../../../node_modules/inversify";
 import { ICommandHandler } from "../abstract/utils/ICommandHandler";
-import { container } from "../inversify.config";
-import { TYPES } from "../types";
+import { TYPES } from "../constants/types";
 import { Command } from "./Command";
 
 @injectable()
@@ -14,8 +13,8 @@ export class InputHandler implements IInputHandler {
     private commandHistory: Array<ICommand> = new Array<ICommand>()
     private _commandHistoryPosition: number = 0
 
-    constructor() {
-        this.commandHandler = container.get<ICommandHandler>(TYPES.CommandHandler)
+    constructor(@inject(TYPES.CommandHandler) commandHandler: ICommandHandler) {
+        this.commandHandler = commandHandler
     }
 
     get shouldAutoClearBuffer(): boolean { return this._shouldAutoClearBuffer}

@@ -1,40 +1,38 @@
 import { IOutputHandler } from "../abstract/utils/IOutputHandler"
 import { Elements } from "../elements/elements"
-import "reflect-metadata"
-import { TYPES } from "../types"
 import { IInputHandler } from "../abstract/utils/IInputHandler"
 import { Command } from "../utils/Command"
 import { Player } from "./Player"
-import { container } from "../inversify.config"
+import { inject, injectable } from "../../../node_modules/inversify";
+import { TYPES } from "../constants/Types";
+import { IPlayer } from "../abstract/entities/IPlayer";
 
+@injectable()
 export class Game {
-    private outputHandler: IOutputHandler
-    private inputHandler: IInputHandler
-    private player: Player
+    private readonly outputHandler: IOutputHandler
+    private readonly inputHandler: IInputHandler
+    private readonly player: Player
 
-    constructor(inputElement: HTMLInputElement, outputElement: HTMLElement) {
-        Elements.inputElement = inputElement
-        Elements.outputElement = outputElement
+    constructor(@inject(TYPES.OutputHandler) outputHandler: IOutputHandler, @inject(TYPES.InputHandler) inputHandler: IInputHandler, @inject(TYPES.Player) player: IPlayer) {
+        this.player = player
+        this.inputHandler = inputHandler
+        this.outputHandler = outputHandler
 
-        this.player = new Player()
-        this.inputHandler = container.get<IInputHandler>(TYPES.InputHandler)
-        this.outputHandler = container.get<IOutputHandler>(TYPES.OutputHandler)
-
-        inputElement.addEventListener("keypress", (event: KeyboardEvent) => {
+        Elements.inputElement.addEventListener("keypress", (event: KeyboardEvent) => {
             if(event.keyCode === 13) {
-                this.inputHandler.addCommand(new Command(inputElement.value))
+                this.inputHandler.addCommand(new Command(Elements.inputElement.value))
                 this.inputHandler.execute()
-                inputElement.value = ""
+                Elements.inputElement.value = ""
             }
         })
 
-        inputElement.addEventListener("keyup", (event: KeyboardEvent) => {
+        Elements.inputElement.addEventListener("keyup", (event: KeyboardEvent) => {
             if(event.keyCode === 38) {
-                inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition-1).commandAsText
+                Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition-1).commandAsText
             } else if(event.keyCode === 40) {
-                inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition+1).commandAsText
+                Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition+1).commandAsText
             }
-            inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length)
+            Elements.inputElement.setSelectionRange(Elements.inputElement.value.length, Elements.inputElement.value.length)
         })
     }
 
