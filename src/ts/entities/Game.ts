@@ -2,11 +2,10 @@ import { IOutputHandler } from "../abstract/utils/IOutputHandler"
 import { Elements } from "../elements/elements"
 import { IInputHandler } from "../abstract/utils/IInputHandler"
 import { Command } from "../utils/Command"
-import { Player } from "./Player"
 import { inject, injectable } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/Types";
 import { IPlayer } from "../abstract/entities/IPlayer";
-import { P1R1_BED, P1R1_BEDROOM } from "../constants/Rooms";
+import { P1R1_BEDROOM } from "../constants/Rooms";
 
 @injectable()
 export class Game {

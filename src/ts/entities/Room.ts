@@ -1,5 +1,5 @@
 import { IRoom } from "../abstract/entities/IRoom";
-import { IObject } from "../abstract/entities/IObject";
+import { IItem } from "../abstract/entities/IItem";
 
 export class Room implements IRoom {
     roomCode: string
@@ -11,10 +11,35 @@ export class Room implements IRoom {
     roomUp?: IRoom
     roomDown?: IRoom
 
-    objects: Array<IObject> = new Array<IObject>()
+    items: Array<IItem> = new Array<IItem>()
 
     constructor(roomCode: string, roomName: string) {
         this.roomCode = roomCode
         this.roomName = roomName
+    }
+
+    toString(): string {
+        return ""
+    }
+    addItem(item: IItem): void {
+        this.items.push(item)
+    }
+    removeItem(item: IItem): void {
+        this.items = this.items.filter((item: IItem) => item.itemCode !== item.itemCode)
+    }
+
+    getItemByName(itemName: string): IItem | null {
+        return this.items.filter((item: IItem) => item.itemName.toLowerCase() === itemName.toLowerCase())[0]
+    }
+
+    getItemNames(): string {
+        let result = ""
+        this.items.forEach((item: IItem, key: number) => {
+            result += item.itemName
+            if(this.items[key+1]) {
+                result += ", "
+            }
+        })
+        return result
     }
 }

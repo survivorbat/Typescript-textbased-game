@@ -3,7 +3,7 @@ import { IInventory } from "../abstract/entities/IInventory";
 import { inject } from "inversify"
 import { TYPES } from "../constants/Types";
 import { injectable } from "../../../node_modules/inversify";
-import { IObject } from "../abstract/entities/IObject";
+import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class InventoryManager implements IInventoryManager {
@@ -12,17 +12,29 @@ export class InventoryManager implements IInventoryManager {
         this.inventory = inventory
     }
 
-    getObjects(): Array<IObject> {
-        return this.inventory.objects
+    setMaxItems(amount: number): void {
+        this.inventory.maxItems = amount
     }
-    addObject(object: IObject): boolean {
-        return  this.inventory.addObject(object)
+
+    getMaxItems(): number {
+        return this.inventory.maxItems
     }
-    removeObject(object: IObject): boolean {
-        return this.inventory.removeObject(object)
+
+    getAmountOfItems(): number {
+        return this.inventory.items.length
+    }
+
+    getItems(): Array<IItem> {
+        return this.inventory.items
+    }
+    addItem(item: IItem): boolean {
+        return  this.inventory.addItem(item)
+    }
+    removeItem(item: IItem): boolean {
+        return this.inventory.removeItem(item)
     }
     isInInventory(itemCode: string): boolean {
-        return this.inventory.objects.map((object: IObject) => object.itemCode).includes(itemCode)
+        return this.inventory.items.map((item: IItem) => item.itemCode).includes(itemCode)
     }
     toString(): string {
         return this.inventory.toString()

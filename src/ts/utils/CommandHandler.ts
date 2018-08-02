@@ -6,6 +6,8 @@ import { TYPES } from "../constants/types";
 import { COLORS } from "../constants/Colors";
 import { IInventoryManager } from "../abstract/utils/IInventoryManager";
 import { IPlayer } from "../abstract/entities/IPlayer";
+import { timingSafeEqual } from "crypto";
+import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
@@ -13,7 +15,11 @@ export class CommandHandler implements ICommandHandler {
     private inventoryManager: IInventoryManager
     private player: IPlayer
 
-    constructor(@inject(TYPES.OutputHandler) outputHandler: IOutputHandler, @inject(TYPES.InventoryManager) inventoryManager: IInventoryManager, @inject(TYPES.Player) player: IPlayer) {
+    constructor(
+        @inject(TYPES.OutputHandler) outputHandler: IOutputHandler, 
+        @inject(TYPES.InventoryManager) inventoryManager: IInventoryManager, 
+        @inject(TYPES.Player) player: IPlayer
+    ) {
         this.outputHandler = outputHandler
         this.inventoryManager = inventoryManager
         this.player = player
@@ -25,7 +31,7 @@ export class CommandHandler implements ICommandHandler {
                 this.outputHandler.println(200, "Pong!")
                 break
             case "inventory": 
-                this.outputHandler.println(200, `Inventory: ${this.inventoryManager.toString()}`)
+                this.outputHandler.println(200, `Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}): ${this.inventoryManager.toString()}`)
                 break
             case "location":
                 this.outputHandler.println(200, `Player location: ${this.player.location? this.player.location.roomName : "Unknown"}`)
@@ -35,16 +41,29 @@ export class CommandHandler implements ICommandHandler {
                 break
             case "observe":
                 if(this.player.location) {
-                    this.outputHandler.println(200, `You observe the following items: ${this.player.location.objects}`)
+                    this.outputHandler.println(200, `You observe the following items: ${this.player.location.getItemNames()}`)
                 } else {
                     this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
-                    this.outputHandler.println(400, "WARNING: Unknown location")
+                    this.outputHandler.println(404, "WARNING: Unknown location")
                     this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 }
                 break
-            case "use":
+            case "pickup":
+                if(!this.player.location) {
+                    return this.outputHandler.println(404, "WARNING: Unknown location")
+                }
                 
-                break
+                const object: IItem | null = this.player.location.getItemByName(command.arguments)
+                if(object) {
+                    if(this.inventoryManager.addItem(object)) {
+                        this.player.location.removeItem(object)
+                        return this.outputHandler.println(201, "Added item to inventory!")
+                    }
+                    this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
+                    this.outputHandler.println(422, `Warning: ${object.getPickupMessage()}`)
+                    return this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
+                }
+                return this.outputHandler.println(404, "WARNING: Object not found")
             default:
                 this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
                 this.outputHandler.println(400, "WARNING: Unknown command, use the help command in order to see a list of commands")

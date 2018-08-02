@@ -1,9 +1,12 @@
-import { IObject } from "../entities/IObject";
+import { IItem } from "../entities/IItem";
 
 export interface IInventoryManager {
-    getObjects(): Array<IObject>
-    addObject(object: IObject): boolean
-    removeObject(object: IObject): boolean
+    getMaxItems(): number
+    setMaxItems(amount: number): void
+    getAmountOfItems(): number
+    getItems(): Array<IItem>
+    addItem(item: IItem): boolean
+    removeItem(item: IItem): boolean
     isInInventory(itemCode: string): boolean
     toString(): string
 }

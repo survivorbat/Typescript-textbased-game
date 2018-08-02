@@ -1,6 +1,6 @@
-import { IObject } from "../abstract/entities/IObject";
+import { IItem } from "../abstract/entities/IItem";
 
-class Object implements IObject {
+export abstract class Item implements IItem {
     itemCode: string
     itemName: string
     info?: string
@@ -9,6 +9,8 @@ class Object implements IObject {
         this.itemCode = itemCode
         this.itemName = itemName
     }
+
+    public abstract getPickupMessage(): string 
 
     use(): void {
 
@@ -20,5 +22,3 @@ class Object implements IObject {
         return false
     }
 }
-
-export {Object}

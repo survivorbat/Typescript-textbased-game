@@ -1,4 +1,4 @@
-import { IObject } from "./IObject";
+import { IItem } from "./IItem";
 
 export interface IRoom {
     roomCode: string
@@ -10,7 +10,11 @@ export interface IRoom {
     roomUp?: IRoom
     roomDown?: IRoom
 
-    objects: Array<IObject>
+    items: Array<IItem>
 
     toString(): string
+    addItem(item: IItem): void
+    removeItem(item: IItem): void
+    getItemByName(itemName: string): IItem | null
+    getItemNames(): string
 }

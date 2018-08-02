@@ -7,7 +7,9 @@ body {
 }
 
 #gamearea {
-
+    div, span {
+        padding: 0.2em 0;
+    }
 }
 
 #inputarea {
@@ -17,16 +19,19 @@ body {
     width: 100%;
     right: 0;
 
+    border-style: solid none none none;
+    border-color: $green;
+    border-width: 1px;
+
+    font-family: $terminalfont;
+    padding: 0.5em;
+    font-size: 0.9em;
+
     input {
-        width: inherit;
-        font-family: $terminalfont;
-        padding: 0.5em;
-        font-size: 0.9em;
+        width: 95%;
         background-color: $darkgreen;
         color: $lightgreen;
-        border-style: solid none none none;
-        border-color: $green;
-        border-width: 1px;
+        border-style: none;
 
         &:focus {
             outline: none;

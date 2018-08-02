@@ -19,7 +19,7 @@ export class OutputHandler implements IOutputHandler {
     public print(text: string): void {
         if(!this.outputElement) { return }
         let newElement = document.createElement("span")
-        newElement.textContent = "> " + text
+        newElement.textContent = text
         newElement.style.color = this.nextLineTextColor
         newElement.style.backgroundColor = this.nextLineBackgroundColor
         this.outputElement.appendChild(newElement)
