@@ -9,7 +9,9 @@ export class Player implements IPlayer {
     public location?: IRoom
     public inventory: IInventory
 
-    constructor(@inject(TYPES.Inventory) inventory: IInventory) {
+    constructor(
+        @inject(TYPES.Inventory) inventory: IInventory
+    ) {
         this.inventory = inventory
     }
 }

@@ -18,9 +18,6 @@ export class Room implements IRoom {
         this.roomName = roomName
     }
 
-    toString(): string {
-        return ""
-    }
     addItem(item: IItem): void {
         this.items.push(item)
     }

@@ -13,7 +13,9 @@ export class InputHandler implements IInputHandler {
     private commandHistory: Array<ICommand> = new Array<ICommand>()
     private _commandHistoryPosition: number = 0
 
-    constructor(@inject(TYPES.CommandHandler) commandHandler: ICommandHandler) {
+    constructor(
+        @inject(TYPES.CommandHandler) commandHandler: ICommandHandler
+    ) {
         this.commandHandler = commandHandler
     }
 

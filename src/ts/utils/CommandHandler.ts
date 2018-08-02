@@ -6,7 +6,6 @@ import { TYPES } from "../constants/types";
 import { COLORS } from "../constants/Colors";
 import { IInventoryManager } from "../abstract/utils/IInventoryManager";
 import { IPlayer } from "../abstract/entities/IPlayer";
-import { timingSafeEqual } from "crypto";
 import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
@@ -37,7 +36,7 @@ export class CommandHandler implements ICommandHandler {
                 this.outputHandler.println(200, `Player location: ${this.player.location? this.player.location.roomName : "Unknown"}`)
                 break
             case "help": 
-                this.outputHandler.println(200, "Available commands: ping, inventory, location, observe, help")
+                this.outputHandler.println(200, "Available commands: ping, inventory, location, observe, pickup, help")
                 break
             case "observe":
                 if(this.player.location) {

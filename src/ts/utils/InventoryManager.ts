@@ -8,7 +8,9 @@ import { IItem } from "../abstract/entities/IItem";
 @injectable()
 export class InventoryManager implements IInventoryManager {
     private inventory: IInventory
-    constructor(@inject(TYPES.Inventory) inventory: IInventory) {
+    constructor(
+        @inject(TYPES.Inventory) inventory: IInventory
+    ) {
         this.inventory = inventory
     }
 
