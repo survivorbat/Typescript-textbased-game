@@ -1,6 +1,24 @@
 import { IObject } from "../abstract/entities/IObject";
 
-export abstract class Object implements IObject {
-    abstract use(): void
-    abstract break(): void
+class Object implements IObject {
+    itemCode: string
+    itemName: string
+    info?: string
+    
+    constructor(itemCode: string, itemName: string) {
+        this.itemCode = itemCode
+        this.itemName = itemName
+    }
+
+    use(): void {
+
+    }
+    break(): void {
+
+    }
+    pickup(): boolean {
+        return false
+    }
 }
+
+export {Object}

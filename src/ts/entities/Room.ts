@@ -3,6 +3,8 @@ import { IObject } from "../abstract/entities/IObject";
 
 export class Room implements IRoom {
     roomCode: string
+    roomName: string
+    startText?: string
 
     roomLeft?: IRoom
     roomRight?: IRoom
@@ -11,7 +13,8 @@ export class Room implements IRoom {
 
     objects: Array<IObject> = new Array<IObject>()
 
-    constructor(roomCode: string) {
+    constructor(roomCode: string, roomName: string) {
         this.roomCode = roomCode
+        this.roomName = roomName
     }
 }

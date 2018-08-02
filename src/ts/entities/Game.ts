@@ -6,12 +6,13 @@ import { Player } from "./Player"
 import { inject, injectable } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/Types";
 import { IPlayer } from "../abstract/entities/IPlayer";
+import { P1R1_BED, P1R1_BEDROOM } from "../constants/Rooms";
 
 @injectable()
 export class Game {
     private readonly outputHandler: IOutputHandler
     private readonly inputHandler: IInputHandler
-    private readonly player: Player
+    private readonly player: IPlayer
 
     constructor(@inject(TYPES.OutputHandler) outputHandler: IOutputHandler, @inject(TYPES.InputHandler) inputHandler: IInputHandler, @inject(TYPES.Player) player: IPlayer) {
         this.player = player
@@ -37,7 +38,8 @@ export class Game {
     }
 
     public run(): void {
-        // Pretend there's something here
         Elements.inputElement.focus()
+        this.outputHandler.println(100, "You wake up in a windowless room, it looks like a bedroom")
+        this.player.location = P1R1_BEDROOM
     }
 }
