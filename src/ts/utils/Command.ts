@@ -11,7 +11,7 @@ export class Command implements ICommand {
         this._command = splitInput[0]
         delete splitInput[0]
         if(splitInput.length > 1) {
-            this._arguments = splitInput.join('')
+            this._arguments = splitInput.join(' ').trim()
         }
     }
 

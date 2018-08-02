@@ -65,7 +65,7 @@ export class CommandHandler implements ICommandHandler {
                 return this.outputHandler.println(404, "WARNING: Object not found")
             default:
                 this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
-                this.outputHandler.println(400, "WARNING: Unknown command, use the help command in order to see a list of commands")
+                this.outputHandler.println(400, `WARNING: Unknown command: ${command.command}, use the help command in order to see a list of commands`)
                 this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
         }
     }

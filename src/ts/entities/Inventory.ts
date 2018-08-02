@@ -4,17 +4,33 @@ import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class Inventory implements IInventory {
+    // Array of items
     public items: Array<IItem> = new Array<IItem>()
+    
+    // Inventory size
     public maxItems: number = 5
 
+    /**
+     * Add item to the inventory
+     * @param item
+     * @returns true or false
+     */
     public addItem(item: IItem): boolean {
         return false
     }  
 
+    /**
+     * Remove item from the inventory
+     * @param item
+     * @returns true or false 
+     */
     public removeItem(item: IItem): boolean {
         return false
     }
 
+    /**
+     * @returns string with all the inventory items
+     */
     public toString(): string {
         return this.items.toString()
     }
