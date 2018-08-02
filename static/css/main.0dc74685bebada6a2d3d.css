@@ -1,0 +1,29 @@
+body {
+  background-color: #000a00;
+  color: greenyellow;
+  font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace; }
+
+#gamearea div, #gamearea span {
+  padding: 0.2em 0; }
+
+#inputarea {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  right: 0;
+  border-style: solid none none none;
+  border-color: green;
+  border-width: 1px;
+  font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace;
+  padding: 0.5em;
+  font-size: 0.9em; }
+  #inputarea input {
+    width: 95%;
+    background-color: #000a00;
+    color: greenyellow;
+    border-style: none; }
+    #inputarea input:focus {
+      outline: none; }
+
+/*# sourceMappingURL=main.0dc74685bebada6a2d3d.css.map*/
