@@ -6,6 +6,8 @@ import { inject, injectable } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/Types";
 import { IPlayer } from "../abstract/entities/IPlayer";
 import { P1R1_BEDROOM } from "../constants/Rooms";
+import { COLORS } from "../constants/Colors";
+import { exists } from "fs";
 
 @injectable()
 export class Game {
@@ -28,10 +30,21 @@ export class Game {
         @inject(TYPES.InputHandler) inputHandler: IInputHandler, 
         @inject(TYPES.Player) player: IPlayer
     ) {
+        if(!Elements.inputElement || !Elements.outputElement) {
+            console.error("Not all html elements were defined in the Elements class, exiting script")
+            window.stop()
+        }
+
         this.player = player
         this.inputHandler = inputHandler
         this.outputHandler = outputHandler
+        this.registerHandlers()
+    }
 
+    /**
+     * Register event listeners
+     */
+    private registerHandlers() {
         Elements.inputElement.addEventListener("keypress", (event: KeyboardEvent) => {
             if(event.keyCode === 13) {
                 this.inputHandler.addCommand(new Command(Elements.inputElement.value))

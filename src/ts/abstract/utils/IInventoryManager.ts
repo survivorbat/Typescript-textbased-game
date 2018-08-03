@@ -7,6 +7,6 @@ export interface IInventoryManager {
     getItems(): Array<IItem>
     addItem(item: IItem): boolean
     removeItem(item: IItem): boolean
-    isInInventory(itemCode: string): boolean
+    isInInventory(itemName: string): boolean
     toString(): string
 }

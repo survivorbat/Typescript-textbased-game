@@ -10,10 +10,20 @@ import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
+    // Outputhandler
     private outputHandler: IOutputHandler
+
+    // Inventorymanager
     private inventoryManager: IInventoryManager
+
+    // Player
     private player: IPlayer
 
+    /**
+     * @param outputHandler the outputhandler
+     * @param inventoryManager the inventorymanager
+     * @param player the player
+     */
     constructor(
         @inject(TYPES.OutputHandler) outputHandler: IOutputHandler, 
         @inject(TYPES.InventoryManager) inventoryManager: IInventoryManager, 
@@ -24,6 +34,9 @@ export class CommandHandler implements ICommandHandler {
         this.player = player
     }
 
+    /**
+     * @param command the command that needs to be executed
+     */
     public executeCommand(command: ICommand): void {
         switch(command.command.toLowerCase()) {
             case "ping":

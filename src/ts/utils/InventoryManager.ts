@@ -7,37 +7,73 @@ import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class InventoryManager implements IInventoryManager {
+    // Inventory
     private inventory: IInventory
+
+    /**
+     * @param inventory inventory object
+     */
     constructor(
         @inject(TYPES.Inventory) inventory: IInventory
     ) {
         this.inventory = inventory
     }
 
+    /**
+     * @param amount
+     */
     setMaxItems(amount: number): void {
         this.inventory.maxItems = amount
     }
 
+    /**
+     * @returns max number of items in inventory
+     */
     getMaxItems(): number {
         return this.inventory.maxItems
     }
 
+    /**
+     * @returns amount of items
+     */
     getAmountOfItems(): number {
         return this.inventory.items.length
     }
 
+    /**
+     * @returns Items in inventpry
+     */
     getItems(): Array<IItem> {
         return this.inventory.items
     }
+
+    /**
+     * @param item that needs to be added
+     * @returns boolean if it worked
+     */
     addItem(item: IItem): boolean {
         return  this.inventory.addItem(item)
     }
+
+    /**
+     * @param item that needs to be removed
+     * @returns boolean if it worked
+     */
     removeItem(item: IItem): boolean {
         return this.inventory.removeItem(item)
     }
-    isInInventory(itemCode: string): boolean {
-        return this.inventory.items.map((item: IItem) => item.itemCode).includes(itemCode)
+
+    /**
+     * @param itemName name of the item
+     * @returns boolean that tells whether item is in inventory
+     */
+    isInInventory(itemName: string): boolean {
+        return this.inventory.items.map((item: IItem) => item.itemName).includes(itemName)
     }
+
+    /**
+     * @returns string of items
+     */
     toString(): string {
         return this.inventory.toString()
     }

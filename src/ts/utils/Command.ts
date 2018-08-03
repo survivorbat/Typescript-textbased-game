@@ -1,10 +1,18 @@
 import { ICommand } from "../abstract/utils/ICommand";
 
 export class Command implements ICommand {
+    // Command in text format
     private readonly _commandAsText: string
+
+    // The first word of the command
     private readonly _command: string
+
+    // The rest of the command
     private readonly _arguments: string = ""
     
+    /**
+     * @param commandAsText the command
+     */
     constructor(commandAsText: string) {
         this._commandAsText = commandAsText
         const splitInput = commandAsText.split(' ')
@@ -15,14 +23,23 @@ export class Command implements ICommand {
         }
     }
 
+    /**
+     * @returns command as text
+     */
     get commandAsText(): string {
         return this._commandAsText
     }
 
+    /**
+     * @returns command
+     */
     get command(): string {
         return this._command
     }
 
+    /**
+     * @returns arguments
+     */
     get arguments(): string {
         return this._arguments
     }
