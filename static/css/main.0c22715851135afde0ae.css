@@ -3,8 +3,11 @@ body {
   color: greenyellow;
   font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace; }
 
-#gamearea div, #gamearea span {
-  padding: 0.2em 0; }
+#gamearea {
+  max-height: 95vh;
+  overflow-y: auto; }
+  #gamearea div, #gamearea span {
+    padding: 0.2em 0; }
 
 #inputarea {
   position: fixed;
@@ -26,4 +29,4 @@ body {
     #inputarea input:focus {
       outline: none; }
 
-/*# sourceMappingURL=main.0dc74685bebada6a2d3d.css.map*/
+/*# sourceMappingURL=main.0c22715851135afde0ae.css.map*/
