@@ -17,6 +17,8 @@ import { IRoomManager } from "./abstract/utils/IRoomManager";
 import { RoomManager } from "./utils/RoomManager";
 import { ICommandFactory } from "./abstract/utils/ICommandFactory";
 import { CommandFactory } from "./utils/CommandFactory";
+import { ICommand } from "./abstract/utils/ICommand";
+import { Command } from "./utils/Command";
 
 const container = new Container()
 container.bind<IOutputHandler>(TYPES.OutputHandler).to(OutputHandler)

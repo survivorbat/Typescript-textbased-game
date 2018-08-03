@@ -1,4 +1,5 @@
 import { Command } from "../Command";
+import { COLORS } from "../../constants/Colors";
 
 export class ObserveCommand extends Command {
     execute(): void {

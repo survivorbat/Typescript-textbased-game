@@ -2,7 +2,7 @@ import { Command } from "../Command";
 
 export class MoveToCommand extends Command {
     execute(): void {
-        const room = this.roomManager.getRoom(command.arguments)
+        const room = this.roomManager.getRoom(this.defaultArguments)
         if(!room) {
             return this.outputHandler.println(404, "WARNING: Unknown location")
         }

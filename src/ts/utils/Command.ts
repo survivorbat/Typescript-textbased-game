@@ -1,21 +1,30 @@
 import { ICommand } from "../abstract/utils/ICommand"
+import { IOutputHandler } from "../abstract/utils/IOutputHandler";
+import { inject } from "../../../node_modules/inversify";
+import { TYPES } from "../constants/Types";
+import { IInventoryManager } from "../abstract/utils/IInventoryManager";
+import { IRoomManager } from "../abstract/utils/IRoomManager";
+import { IPlayer } from "../abstract/entities/IPlayer";
 
 export abstract class Command implements ICommand {
-    // The rest of the command
-    private _defaultArguments: string = ""
+    public defaultArguments: string = ""
 
-    protected test: string = ""
+    protected outputHandler: IOutputHandler
+    protected inventoryManager: IInventoryManager
+    protected roomManager: IRoomManager
+    protected player: IPlayer
 
-    /**
-     * @returns arguments
-     */
-    get defaultArguments(): string {
-        return this._defaultArguments
+    constructor(
+        @inject(TYPES.OutputHandler) outputHandler: IOutputHandler,
+        @inject(TYPES.InventoryManager) inventoryManager: IInventoryManager,
+        @inject(TYPES.RoomManager) roomManager: IRoomManager,
+        @inject(TYPES.Player) player: IPlayer
+    ) {
+        this.outputHandler = outputHandler
+        this.inventoryManager = inventoryManager
+        this.roomManager = roomManager
+        this.player = player
     }
 
     abstract execute(): void
-
-    public setDefaultArguments(args: string): void {
-        this._defaultArguments = args
-    }
 }

@@ -1,4 +1,6 @@
 import { Command } from "../Command";
+import { IItem } from "../../abstract/entities/IItem";
+import { COLORS } from "../../constants/Colors";
 
 export class PickupCommand extends Command {
     execute(): void {
@@ -6,7 +8,7 @@ export class PickupCommand extends Command {
             return this.outputHandler.println(404, "WARNING: Unknown location")
         }
         
-        const object: IItem | null = this.player.location.getItemByName(command.arguments)
+        const object: IItem | null = this.player.location.getItemByName(this.defaultArguments)
         if(object) {
             if(this.inventoryManager.addItem(object)) {
                 this.player.location.removeItem(object)

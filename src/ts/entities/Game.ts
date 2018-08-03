@@ -52,20 +52,20 @@ export class Game {
             if(event.keyCode === 13) {
                 const commandType = getCommandTypeFromString(Elements.inputElement.value)
                 const commandObject = commandFactory.getInstanceFromType(commandType)
-                this.inputHandler.addCommand(commandObject)
+                this.inputHandler.addCommand(commandObject, Elements.inputElement.value)
                 this.inputHandler.execute()
                 Elements.inputElement.value = ""
             }
         })
 
-        // Elements.inputElement.addEventListener("keyup", (event: KeyboardEvent) => {
-        //     if(event.keyCode === 38) {
-        //         Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition-1)
-        //     } else if(event.keyCode === 40) {
-        //         Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition+1)
-        //     }
-        //     Elements.inputElement.setSelectionRange(Elements.inputElement.value.length, Elements.inputElement.value.length)
-        // })
+        Elements.inputElement.addEventListener("keyup", (event: KeyboardEvent) => {
+            if(event.keyCode === 38) {
+                Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition-1)
+            } else if(event.keyCode === 40) {
+                Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition+1)
+            }
+            Elements.inputElement.setSelectionRange(Elements.inputElement.value.length, Elements.inputElement.value.length)
+        })
     }
 
     /**
