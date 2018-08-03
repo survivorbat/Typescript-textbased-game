@@ -15,10 +15,8 @@ import { IInventoryManager } from "./abstract/utils/IInventoryManager";
 import { InventoryManager } from "./utils/InventoryManager";
 import { IRoomManager } from "./abstract/utils/IRoomManager";
 import { RoomManager } from "./utils/RoomManager";
-import { ICommandFactory } from "./abstract/utils/ICommandFactory";
-import { CommandFactory } from "./utils/CommandFactory";
-import { ICommand } from "./abstract/utils/ICommand";
-import { Command } from "./utils/Command";
+import { ICommandHandler } from "./abstract/utils/ICommandHandler";
+import { CommandHandler } from "./utils/CommandHandler";
 
 const container = new Container()
 container.bind<IOutputHandler>(TYPES.OutputHandler).to(OutputHandler)
@@ -28,6 +26,6 @@ container.bind<IPlayer>(TYPES.Player).to(Player).inSingletonScope()
 container.bind<IInventory>(TYPES.Inventory).to(Inventory).inSingletonScope()
 container.bind<IInventoryManager>(TYPES.InventoryManager).to(InventoryManager)
 container.bind<IRoomManager>(TYPES.RoomManager).to(RoomManager)
-container.bind<ICommandFactory>(TYPES.CommandFactory).to(CommandFactory)
+container.bind<ICommandHandler>(TYPES.CommandHandler).to(CommandHandler)
 
 export { container }

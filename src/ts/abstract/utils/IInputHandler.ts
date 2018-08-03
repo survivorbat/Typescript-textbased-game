@@ -4,8 +4,8 @@ import { IOutputHandler } from "./IOutputHandler";
 export interface IInputHandler {
     commandHistoryPosition: number
 
-    addCommand(input: ICommand, inputAsText: string): void
+    addCommand(input: ICommand): void
     clearBuffer(): void
     execute(): void
-    getCommand(position: number): string
+    getCommand(position: number): ICommand
 }

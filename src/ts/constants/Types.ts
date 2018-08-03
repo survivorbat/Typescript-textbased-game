@@ -6,7 +6,7 @@ const TYPES = {
     Inventory: Symbol.for("Inventory"),
     InventoryManager: Symbol.for("InventoryManager"),
     RoomManager: Symbol.for("RoomManager"),
-    CommandFactory: Symbol.for("CommandFactory")
+    CommandHandler: Symbol.for("CommandHandler")
 }
 
 export {TYPES}

@@ -1,4 +1,7 @@
+import { CommandType } from "../../constants/CommandTypes";
+
 export interface ICommand {
-    defaultArguments: string
-    execute(): void
+    command: CommandType
+    commandAsText: string
+    arguments: string
 }
