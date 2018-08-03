@@ -46,7 +46,6 @@ export class Game {
     private registerHandlers() {
         Elements.inputElement.addEventListener("keypress", (event: KeyboardEvent) => {
             if(event.keyCode === 13) {
-                //const commandType = getCommandTypeFromString(Elements.inputElement.value)
                 this.inputHandler.addCommand(new Command(Elements.inputElement.value))
                 this.inputHandler.execute()
                 Elements.inputElement.value = ""
