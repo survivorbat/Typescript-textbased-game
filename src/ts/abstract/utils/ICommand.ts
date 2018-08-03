@@ -1,5 +1,5 @@
 export interface ICommand {
-    command: string
-    commandAsText: string
-    arguments: string
+    defaultArguments: string
+    execute(): void
+    setDefaultArguments(args: string): void
 }

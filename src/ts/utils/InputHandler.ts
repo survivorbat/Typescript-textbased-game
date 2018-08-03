@@ -1,19 +1,14 @@
 import { IInputHandler } from "../abstract/utils/IInputHandler";
 import { ICommand } from "../abstract/utils/ICommand";
 import { injectable, inject } from "../../../node_modules/inversify";
-import { ICommandHandler } from "../abstract/utils/ICommandHandler";
 import { TYPES } from "../constants/types";
-import { Command } from "./Command";
 import { IOutputHandler } from "../abstract/utils/IOutputHandler";
-import { COLORS } from "../constants/Colors";
+import { UnknownCommand } from "./commands/UnknownCommand";
 
 @injectable()
 export class InputHandler implements IInputHandler {
     // Inputbuffer, basically an array of commands
     private inputBuffer: Array<ICommand> = new Array<ICommand>()
-
-    // Commandhandler, this one gets injected
-    private commandHandler: ICommandHandler
 
     // If the buffer should be cleared after executing commands
     private _shouldAutoClearBuffer: boolean = true
@@ -31,10 +26,8 @@ export class InputHandler implements IInputHandler {
      * @param commandHandler the handler for the commands
      */
     constructor(
-        @inject(TYPES.CommandHandler) commandHandler: ICommandHandler,
         @inject(TYPES.OutputHandler) outputHandler: IOutputHandler
     ) {
-        this.commandHandler = commandHandler
         this.outputHandler = outputHandler
     }
 
@@ -69,10 +62,10 @@ export class InputHandler implements IInputHandler {
     public getCommand(position: number): ICommand {
         if(position < 0) {
             this._commandHistoryPosition = this.commandHistory.length
-            return new Command("")
+            return new UnknownCommand()
         } else if(position > this.commandHistory.length) {
             this._commandHistoryPosition = this.commandHistory.length
-            return new Command("")
+            return new UnknownCommand()
         }
         this._commandHistoryPosition = position
         return this.commandHistory[this._commandHistoryPosition];
@@ -90,10 +83,7 @@ export class InputHandler implements IInputHandler {
      */
     public execute(): void {
         this.inputBuffer.forEach((command: ICommand) => {
-            this.outputHandler.setNextLineTextColor(COLORS.BLUE)
-            this.outputHandler.println(100, `YOU: ${command.commandAsText}`)
-            this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
-            this.commandHandler.executeCommand(command)
+            command.execute()
         })
         if(this.shouldAutoClearBuffer) { this.clearBuffer() }
     }
