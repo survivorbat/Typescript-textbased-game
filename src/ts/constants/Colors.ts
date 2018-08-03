@@ -1,7 +1,8 @@
 const COLORS = {
     YELLOW: "yellow",
     RED: "red",
-    LIGHTGREEN: "greenyellow"
+    LIGHTGREEN: "greenyellow",
+    BLUE: "#00ccff"
 }
 
 export { COLORS }

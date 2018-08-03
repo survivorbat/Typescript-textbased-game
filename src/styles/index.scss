@@ -7,6 +7,8 @@ body {
 }
 
 #gamearea {
+    max-height: 95vh;
+    overflow-y: auto;
     div, span {
         padding: 0.2em 0;
     }

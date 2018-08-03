@@ -1,10 +1,15 @@
 import { IItem } from "../abstract/entities/IItem";
 
 export abstract class Item implements IItem {
+
     // Item code
     itemCode: string
+
     // Name of the item
     itemName: string
+
+    // Pickupable?
+    pickupable: boolean = false
 
     // Info on the item
     info?: string
@@ -28,20 +33,9 @@ export abstract class Item implements IItem {
     /**
      * Use the item
      */
-    use(): void {
-
-    }
+    abstract use(): void 
     /**
      * Break the item
      */
-    break(): void {
-
-    }
-
-    /**
-     * @param boolean  true or false
-     */
-    pickup(): boolean {
-        return false
-    }
+    abstract break(): void
 }

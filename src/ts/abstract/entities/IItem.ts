@@ -1,8 +1,8 @@
 export interface IItem {
     itemCode: string
     itemName: string
+    pickupable: boolean
     use(): void
     break(): void
-    pickup(): boolean
     getPickupMessage(): string
 }

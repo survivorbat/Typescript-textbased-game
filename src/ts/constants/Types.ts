@@ -5,7 +5,8 @@ const TYPES = {
     Game: Symbol.for("Game"),
     Player: Symbol.for("Player"),
     Inventory: Symbol.for("Inventory"),
-    InventoryManager: Symbol.for("InventoryManager")
+    InventoryManager: Symbol.for("InventoryManager"),
+    RoomManager: Symbol.for("RoomManager")
 }
 
 export {TYPES}

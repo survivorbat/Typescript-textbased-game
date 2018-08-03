@@ -1,5 +1,6 @@
 import { IRoom } from "../abstract/entities/IRoom";
 import { IItem } from "../abstract/entities/IItem";
+import { IOutputHandler } from "../abstract/utils/IOutputHandler";
 
 export class Room implements IRoom {
 
@@ -23,6 +24,9 @@ export class Room implements IRoom {
 
     // Room down
     roomDown?: IRoom
+
+    // Locked
+    locked: boolean = false
 
     // List of items
     items: Array<IItem> = new Array<IItem>()
@@ -72,6 +76,53 @@ export class Room implements IRoom {
                 result += ", "
             }
         })
-        return result
+        return result.trim()
+    }
+
+    /**
+     * Initialize room
+     */
+    init(outputHandler: IOutputHandler): void {
+        outputHandler.println(200, `${this.startText}`)
+    }
+
+    /**
+     * @returns a string containing the room names
+     */
+    getAdjacentRoomNames(): string {
+        let result = ""
+        if(this.roomDown) {
+            result += this.roomDown.roomName + " "
+        }
+        if(this.roomUp) {
+            result += this.roomUp.roomName + " "
+        }
+        if(this.roomRight) {
+            result += this.roomRight.roomName + " "
+        }
+        if(this.roomLeft) {
+            result += this.roomLeft.roomName + " "
+        }
+        return result.trim()
+    }
+
+    /** 
+     * @returns number of adjacent rooms
+     */
+    getAmountOfAdjacentRooms(): number {
+        let number = 0
+        if(this.roomDown) {
+            number++
+        }
+        if(this.roomUp) {
+            number++
+        }
+        if(this.roomRight) {
+            number++
+        }
+        if(this.roomLeft) {
+            number++
+        }
+        return number
     }
 }

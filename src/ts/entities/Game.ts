@@ -68,7 +68,8 @@ export class Game {
      */
     public run(): void {
         Elements.inputElement.focus()
-        this.outputHandler.println(100, "You wake up in a windowless room, it looks like a bedroom")
+        this.outputHandler.println(100, "You wake up in a windowless room")
         this.player.location = P1R1_BEDROOM
+        this.player.location.init(this.outputHandler)
     }
 }

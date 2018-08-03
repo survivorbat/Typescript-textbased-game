@@ -4,6 +4,8 @@ import { injectable, inject } from "../../../node_modules/inversify";
 import { ICommandHandler } from "../abstract/utils/ICommandHandler";
 import { TYPES } from "../constants/types";
 import { Command } from "./Command";
+import { IOutputHandler } from "../abstract/utils/IOutputHandler";
+import { COLORS } from "../constants/Colors";
 
 @injectable()
 export class InputHandler implements IInputHandler {
@@ -22,13 +24,18 @@ export class InputHandler implements IInputHandler {
     // Current position
     private _commandHistoryPosition: number = 0
 
+    // Outputhandler to put out commands
+    private outputHandler: IOutputHandler
+
     /**
      * @param commandHandler the handler for the commands
      */
     constructor(
-        @inject(TYPES.CommandHandler) commandHandler: ICommandHandler
+        @inject(TYPES.CommandHandler) commandHandler: ICommandHandler,
+        @inject(TYPES.OutputHandler) outputHandler: IOutputHandler
     ) {
         this.commandHandler = commandHandler
+        this.outputHandler = outputHandler
     }
 
     /**
@@ -83,6 +90,9 @@ export class InputHandler implements IInputHandler {
      */
     public execute(): void {
         this.inputBuffer.forEach((command: ICommand) => {
+            this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+            this.outputHandler.println(100, `YOU: ${command.commandAsText}`)
+            this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
             this.commandHandler.executeCommand(command)
         })
         if(this.shouldAutoClearBuffer) { this.clearBuffer() }
