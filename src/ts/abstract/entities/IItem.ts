@@ -4,5 +4,6 @@ export interface IItem {
     pickupable: boolean
     use(): void
     break(): void
-    getPickupMessage(): string
+    getPickupMessages(): Array<string>
+    toString(): string
 }

@@ -18,6 +18,10 @@ export class OutputHandler implements IOutputHandler {
      */
     constructor() {
         this.outputElement = Elements.outputElement
+        if(!Elements.inputElement || !Elements.outputElement) {
+            console.error("Not all html elements were defined in the Elements class, exiting script")
+            window.stop()
+        }
     }
 
     /**
@@ -43,10 +47,10 @@ export class OutputHandler implements IOutputHandler {
      * @param code that needs to be displayed
      * @param text line of text that needs to be printed
      */
-    public println(code: number, text: string): void {
+    public println(text: string): void {
         if(!this.outputElement) { return }
         let newElement = document.createElement("div")
-        newElement.textContent = `> ${code}: ${text}`
+        newElement.textContent = `> ${text}`
         newElement.style.color = this.nextLineTextColor
         newElement.style.backgroundColor = this.nextLineBackgroundColor
         this.outputElement.appendChild(newElement)

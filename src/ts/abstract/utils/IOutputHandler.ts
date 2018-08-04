@@ -2,7 +2,7 @@ export interface IOutputHandler {
     setElement(element: HTMLElement): void
 
     print(text: string): void
-    println(code: number, text: string): void
+    println(text: string): void
 
     setNextLineTextColor(color: string): void
     setNextLineBackgroundColor(color: string): void

@@ -5,7 +5,6 @@ import { inject, injectable } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/Types";
 import { IPlayer } from "../abstract/entities/IPlayer";
 import { P1R1_BEDROOM } from "../constants/Rooms";
-import { getCommandTypeFromString } from "../constants/CommandTypes";
 import { Command } from "../utils/Command";
 
 @injectable()
@@ -29,11 +28,6 @@ export class Game {
         @inject(TYPES.InputHandler) inputHandler: IInputHandler, 
         @inject(TYPES.Player) player: IPlayer
     ) {
-        if(!Elements.inputElement || !Elements.outputElement) {
-            console.error("Not all html elements were defined in the Elements class, exiting script")
-            window.stop()
-        }
-
         this.player = player
         this.inputHandler = inputHandler
         this.outputHandler = outputHandler
@@ -68,7 +62,7 @@ export class Game {
      */
     public run(): void {
         Elements.inputElement.focus()
-        this.outputHandler.println(100, "You wake up in a windowless room")
+        this.outputHandler.println("You wake up in a windowless room")
         this.player.location = P1R1_BEDROOM
         this.player.location.init(this.outputHandler)
     }

@@ -53,7 +53,7 @@ export class Room implements IRoom {
      * @param item to be removed
      */
     removeItem(item: IItem): void {
-        this.items = this.items.filter((item: IItem) => item.itemCode !== item.itemCode)
+        this.items = this.items.filter((roomItem: IItem) => roomItem.itemCode !== item.itemCode)
     }
 
     /**
@@ -83,7 +83,7 @@ export class Room implements IRoom {
      * Initialize room
      */
     init(outputHandler: IOutputHandler): void {
-        outputHandler.println(200, `${this.startText}`)
+        outputHandler.println(`${this.startText}`)
     }
 
     /**

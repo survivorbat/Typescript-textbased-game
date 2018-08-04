@@ -8,7 +8,7 @@ export class Inventory implements IInventory {
     public items: Array<IItem> = new Array<IItem>()
     
     // Inventory size
-    public maxItems: number = 5
+    public maxItems: number = 2
 
     /**
      * Add item to the inventory
@@ -16,6 +16,10 @@ export class Inventory implements IInventory {
      * @returns true or false
      */
     public addItem(item: IItem): boolean {
+        if(!this.isInventoryFull() && item.pickupable) {
+            this.items.push(item)
+            return true
+        }
         return false
     }  
 
@@ -33,5 +37,12 @@ export class Inventory implements IInventory {
      */
     public toString(): string {
         return this.items.toString()
+    }
+
+    /**
+     * @returns whether inventory is full or not
+     */
+    private isInventoryFull(): boolean {
+        return this.items.length >= this.maxItems
     }
 }

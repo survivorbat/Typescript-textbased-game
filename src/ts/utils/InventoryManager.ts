@@ -52,7 +52,7 @@ export class InventoryManager implements IInventoryManager {
      * @returns boolean if it worked
      */
     addItem(item: IItem): boolean {
-        return  this.inventory.addItem(item)
+        return this.inventory.addItem(item)
     }
 
     /**
