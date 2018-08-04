@@ -25,21 +25,8 @@ export class CommandHandler implements ICommandHandler {
      */
     public executeCommand(command: ICommand): void {
         switch(command.command) {
-            case CommandType.ping: {
-                this.outputHandler.println("Pong!")
-                break
-            }
 
-            case CommandType.inventory: {
-                this.outputHandler.println(`Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}): ${this.inventoryManager.toString()}`)
-                break
-            }
-
-            case CommandType.location: {
-                this.outputHandler.println(`Player location: ${this.player.location? this.player.location.roomName : "Unknown"}`)
-                break
-            }
-
+            // Display a list of commands
             case CommandType.help: {
                 this.outputHandler.println("Available commands:")
                 this.outputHandler.println("---------------------------------------------")
@@ -60,6 +47,25 @@ export class CommandHandler implements ICommandHandler {
                 break
             }
 
+            // Ping command which returns a pong
+            case CommandType.ping: {
+                this.outputHandler.println("Pong!")
+                break
+            }
+
+            // Command that shows the inventory size, maxsize and items
+            case CommandType.inventory: {
+                this.outputHandler.println(`Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}): ${this.inventoryManager.toString()}`)
+                break
+            }
+
+            // Current location of the player
+            case CommandType.location: {
+                this.outputHandler.println(`Player location: ${this.player.location? this.player.location.roomName : "Unknown"}`)
+                break
+            }
+
+            // Get a list of adjacent rooms
             case CommandType.doors: {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
@@ -68,6 +74,7 @@ export class CommandHandler implements ICommandHandler {
                 break
             }
 
+            // Observe current location
             case CommandType.observe: {
                 if(this.player.location) {
                     this.outputHandler.println(`You observe the following items: ${this.player.location.getItemNames()} and ${this.player.location.getAmountOfAdjacentRooms()} door(s)`)
@@ -79,6 +86,7 @@ export class CommandHandler implements ICommandHandler {
                 break
             }
 
+            // Move to a different location
             case CommandType.moveto: {
                 const room = this.roomManager.getRoom(command.arguments)
                 if(!room) {
@@ -90,11 +98,13 @@ export class CommandHandler implements ICommandHandler {
                 break
             }
 
+            // Clear the screen
             case CommandType.clear: {
                 this.outputHandler.clear()
                 break
             }
 
+            // Pickup an item in the room
             case CommandType.pickup: {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
@@ -106,6 +116,8 @@ export class CommandHandler implements ICommandHandler {
                 }
                 return this.outputHandler.println("Object not found")
             }
+
+            // Use an item
             case CommandType.use: {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
@@ -117,6 +129,7 @@ export class CommandHandler implements ICommandHandler {
                 return this.outputHandler.println("Object not found")
             }
 
+            // Get info on an inventory item
             case CommandType.info: {
                 const object: IItem | null = this.inventoryManager.getItems().filter((item: IItem) => item.itemName === command.arguments)[0] || null
                 if(object) {
@@ -125,6 +138,7 @@ export class CommandHandler implements ICommandHandler {
                 return this.outputHandler.println("Object not found")
             }
 
+            // Drop an item
             case CommandType.drop: {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
@@ -139,6 +153,7 @@ export class CommandHandler implements ICommandHandler {
                 return this.outputHandler.println("Object not found")
             }
 
+            // Display unknown command text
             default: {
                 this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
                 this.outputHandler.println(`Unknown command, use the help command in order to see a list of commands`)
