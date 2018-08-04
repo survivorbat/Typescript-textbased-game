@@ -3,13 +3,6 @@ import { IItem } from "../abstract/entities/IItem";
 import { IOutputHandler } from "../abstract/utils/IOutputHandler";
 
 export class Room implements IRoom {
-
-    // Roomcode
-    roomCode: string
-
-    // Roomname
-    roomName: string
-
     // Text once you enter the room
     startText?: string
 
@@ -35,10 +28,10 @@ export class Room implements IRoom {
      * @param roomCode Roomcode
      * @param roomName Name of the room
      */
-    constructor(roomCode: string, roomName: string) {
-        this.roomCode = roomCode
-        this.roomName = roomName
-    }
+    constructor(
+        public readonly roomCode: string, 
+        public readonly roomName: string
+    ) { }
 
     /**
      * Add an item
@@ -53,7 +46,7 @@ export class Room implements IRoom {
      * @param item to be removed
      */
     removeItem(item: IItem): void {
-        this.items = this.items.filter((roomItem: IItem) => roomItem.itemCode !== item.itemCode)
+        this.items = this.items.filter((roomItem: IItem) => roomItem.itemName !== item.itemName)
     }
 
     /**

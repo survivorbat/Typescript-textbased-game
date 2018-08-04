@@ -1,52 +1,36 @@
 import { IItem } from "../abstract/entities/IItem";
+import { IUseBehaviour } from "../abstract/utils/IUseBehaviour";
+import { IBreakBehaviour } from "../abstract/utils/IBreakBehaviour";
+import { IPickupBehaviour } from "../abstract/utils/IPickupBehaviour";
 
-export abstract class Item implements IItem {
-
-    // Item code
-    itemCode: string
-
-    // Name of the item
-    itemName: string
-
-    // Pickupable?
-    pickupable: boolean = false
-
-    // Info on the item
-    info?: string
-    
-    /**
-     * Construct an item
-     * @param itemCode
-     * @param itemName
-     */
-    constructor(itemCode: string, itemName: string) {
-        this.itemCode = itemCode
-        this.itemName = itemName
-    }
-
-    /**
-     * Get message that is returned on picking up an item
-     * @returns a string
-     */
-    public getPickupMessages(): Array<string> {
-        return [
-            "I can't pick that up",
-            "This doesn't fit in my pocket",
-            "This item is a bit too heavy to pick up",
-            "I can't",
-            "Too heavy",
-            "This doesn't look like something I can carry"
-        ]
-    }
+export class Item implements IItem {
+    constructor(
+        public readonly itemName: string, 
+        public readonly info: string = "",
+        private readonly useBehaviour: IUseBehaviour,
+        private readonly breakBehaviour: IBreakBehaviour,
+        private readonly pickupBehaviour: IPickupBehaviour
+    ) { }
 
     /**
      * Use the item
      */
-    abstract use(): void 
+    public use(): void {
+        this.useBehaviour.use()
+    } 
     /**
      * Break the item
      */
-    abstract break(): void
+    public break(): void {
+        this.breakBehaviour.break()
+    }
+
+    /**
+     * pickup the item
+     */
+    public pickup(): void {
+        this.pickupBehaviour.pickup()
+    }
 
     /**
      * Tostring since

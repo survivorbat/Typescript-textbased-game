@@ -7,12 +7,6 @@ import { IOutputHandler } from "../abstract/utils/IOutputHandler";
 
 @injectable()
 export class RoomManager implements IRoomManager {
-    
-    // Player
-    private player: IPlayer
-
-    // Outputhandler
-    private outputHandler: IOutputHandler
 
     /**
      * Constructor
@@ -20,12 +14,10 @@ export class RoomManager implements IRoomManager {
      * @param outputHandler to handle messages
      */
     constructor(
-        @inject(TYPES.Player) player: IPlayer,
-        @inject(TYPES.OutputHandler) outputHandler: IOutputHandler
-    ) {
-        this.player = player
-        this.outputHandler = outputHandler
-    }
+        @inject(TYPES.Player) private readonly player: IPlayer,
+        @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler
+    ) {}
+    
     /**
      * Move to a different room
      * @param room to move to

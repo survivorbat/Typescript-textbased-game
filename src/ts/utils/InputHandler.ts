@@ -10,9 +10,6 @@ export class InputHandler implements IInputHandler {
     // Inputbuffer, basically an array of commands
     private inputBuffer: Array<ICommand> = new Array<ICommand>()
 
-    // Commandhandler, this one gets injected
-    private commandHandler: ICommandHandler
-
     // If the buffer should be cleared after executing commands
     private _shouldAutoClearBuffer: boolean = true
 
@@ -26,10 +23,8 @@ export class InputHandler implements IInputHandler {
      * @param commandHandler the handler for the commands
      */
     constructor(
-        @inject(TYPES.CommandHandler) commandHandler: ICommandHandler
-    ) {
-        this.commandHandler = commandHandler
-    }
+        @inject(TYPES.CommandHandler) private readonly commandHandler: ICommandHandler
+    ) {}
 
     /**
      * @returns boolean 

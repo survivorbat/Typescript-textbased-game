@@ -6,7 +6,11 @@ const TYPES = {
     Inventory: Symbol.for("Inventory"),
     InventoryManager: Symbol.for("InventoryManager"),
     RoomManager: Symbol.for("RoomManager"),
-    CommandHandler: Symbol.for("CommandHandler")
+    CommandHandler: Symbol.for("CommandHandler"),
+    
+    BedUseBehaviour: Symbol.for("BedUseBehaviour"),
+    BedPickupBehaviour: Symbol.for("BedPickupBehaviour"),
+    BedBreakBehaviour: Symbol.for("BedBreakBehaviour")
 }
 
 export {TYPES}

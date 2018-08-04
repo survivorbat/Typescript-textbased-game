@@ -16,7 +16,7 @@ export class Inventory implements IInventory {
      * @returns true or false
      */
     public addItem(item: IItem): boolean {
-        if(!this.isInventoryFull() && item.pickupable) {
+        if(!this.isInventoryFull()) {
             this.items.push(item)
             return true
         }

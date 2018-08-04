@@ -4,33 +4,22 @@ import { IInputHandler } from "../abstract/utils/IInputHandler"
 import { inject, injectable } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/Types";
 import { IPlayer } from "../abstract/entities/IPlayer";
-import { P1R1_BEDROOM } from "../constants/Rooms";
 import { Command } from "../utils/Command";
+import { GameData } from "../constants/GameData";
+import { container } from "../inversify.config";
 
 @injectable()
 export class Game {
-    // Outputhandler
-    private readonly outputHandler: IOutputHandler
-
-    // Inputhandler
-    private readonly inputHandler: IInputHandler
-
-    // Player object
-    private readonly player: IPlayer
-
     /**
      * @param outputHandler The output handler that will output lines to the screen
      * @param inputHandler The handler that will take care of the input
      * @param player The player object
      */
     constructor(
-        @inject(TYPES.OutputHandler) outputHandler: IOutputHandler, 
-        @inject(TYPES.InputHandler) inputHandler: IInputHandler, 
-        @inject(TYPES.Player) player: IPlayer
+        @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler, 
+        @inject(TYPES.InputHandler) private readonly inputHandler: IInputHandler, 
+        @inject(TYPES.Player) private readonly player: IPlayer
     ) {
-        this.player = player
-        this.inputHandler = inputHandler
-        this.outputHandler = outputHandler
         this.registerHandlers()
     }
 
@@ -61,8 +50,10 @@ export class Game {
      */
     public run(): void {
         Elements.inputElement.focus()
-        this.outputHandler.println("You wake up in a windowless room")
-        this.player.location = P1R1_BEDROOM
+        GameData.init(container)
+        this.player.location = GameData.START
         this.player.location.init(this.outputHandler)
+
+        this.outputHandler.println("You wake up in a windowless room")
     }
 }

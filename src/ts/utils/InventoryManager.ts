@@ -7,17 +7,13 @@ import { IItem } from "../abstract/entities/IItem";
 
 @injectable()
 export class InventoryManager implements IInventoryManager {
-    // Inventory
-    private inventory: IInventory
 
     /**
      * @param inventory inventory object
      */
     constructor(
-        @inject(TYPES.Inventory) inventory: IInventory
-    ) {
-        this.inventory = inventory
-    }
+        @inject(TYPES.Inventory) private readonly inventory: IInventory
+    ) { }
 
     /**
      * @param amount

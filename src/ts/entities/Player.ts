@@ -8,14 +8,12 @@ import { TYPES } from "../constants/Types";
 export class Player implements IPlayer {
     // Current room
     public location?: IRoom
-    // Inventory singleton
-    public inventory: IInventory
 
     /**
      * @param inventory inventory singleton
      */
     constructor(
-        @inject(TYPES.Inventory) inventory: IInventory
+        @inject(TYPES.Inventory) public inventory: IInventory
     ) {
         this.inventory = inventory
     }
