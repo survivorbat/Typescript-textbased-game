@@ -12,8 +12,8 @@ export class Player implements IPlayer {
     public location?: IRoom
 
     constructor(
-        @inject(TYPES.Inventory) private inventory: IInventory,
-        @inject(TYPES.InventoryManager) public inventoryManager: IInventoryManager
+        @inject(TYPES.Inventory) private readonly inventory: IInventory,
+        @inject(TYPES.InventoryManager) public readonly inventoryManager: IInventoryManager
     ) {}
 
     public pickupItem(item: IItem): boolean {

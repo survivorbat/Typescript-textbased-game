@@ -3,7 +3,6 @@ import { IOutputHandler } from "../abstract/utils/IOutputHandler";
 import { injectable, inject } from "../../../node_modules/inversify";
 import { TYPES } from "../constants/types";
 import { COLORS } from "../constants/Colors";
-import { IInventoryManager } from "../abstract/utils/IInventoryManager";
 import { IPlayer } from "../abstract/entities/IPlayer";
 import { IItem } from "../abstract/entities/IItem";
 import { IRoomManager } from "../abstract/utils/IRoomManager";
@@ -16,7 +15,6 @@ export class CommandHandler implements ICommandHandler {
 
     constructor(
         @inject(TYPES.OutputHandler) public readonly outputHandler: IOutputHandler, 
-        @inject(TYPES.InventoryManager) public readonly inventoryManager: IInventoryManager, 
         @inject(TYPES.Player) public readonly player: IPlayer,
         @inject(TYPES.RoomManager) public readonly roomManager: IRoomManager
     ) { }
@@ -58,9 +56,9 @@ export class CommandHandler implements ICommandHandler {
 
             // Command that shows the inventory size, maxsize and items
             case CommandType.inventory: {
-                this.outputHandler.println(`Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}):`)
+                this.outputHandler.println(`Inventory (${this.player.inventoryManager.getAmountOfItems()}/${this.player.inventoryManager.getMaxItems()}):`)
                 this.outputHandler.setNextLineTextColor(COLORS.BLUE)
-                this.outputHandler.println(`${this.inventoryManager.toString()}`)
+                this.outputHandler.println(`${this.player.inventoryManager.toString()}`)
                 this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
@@ -144,7 +142,7 @@ export class CommandHandler implements ICommandHandler {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
                 }
-                const object: IItem | null = this.player.location.getItemByName(command.arguments) || this.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === command.arguments)[0]
+                const object: IItem | null = this.player.location.getItemByName(command.arguments) || this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === command.arguments)[0]
                 if(object) {
                     return object.use()
                 }
@@ -153,7 +151,7 @@ export class CommandHandler implements ICommandHandler {
 
             // Get info on an inventory item
             case CommandType.info: {
-                const object: IItem | null = this.inventoryManager.getItems().filter((item: IItem) => item.itemName === command.arguments)[0] || null
+                const object: IItem | null = this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName === command.arguments)[0] || null
                 if(object) {
                     return object.use()
                 }
@@ -166,9 +164,9 @@ export class CommandHandler implements ICommandHandler {
                     return this.outputHandler.println("Unknown location")
                 }
                 
-                const object: IItem | null = this.inventoryManager.getItems().filter((item: IItem) => item.itemName === command.arguments)[0] || null
+                const object: IItem | null = this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName === command.arguments)[0] || null
                 if(object) {
-                    this.inventoryManager.removeItem(object)
+                    this.player.inventoryManager.removeItem(object)
                     this.player.location.addItem(object)
                     return
                 }
