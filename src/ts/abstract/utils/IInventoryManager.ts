@@ -8,5 +8,6 @@ export interface IInventoryManager {
     addItem(item: IItem): boolean
     removeItem(item: IItem): boolean
     isInInventory(itemName: string): boolean
+    consumeExpansionPack(item: IItem): void 
     toString(): string
 }

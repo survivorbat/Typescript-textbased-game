@@ -4,9 +4,7 @@ import { IRoom } from "../abstract/entities/IRoom";
 import { Container } from "../../../node_modules/inversify";
 import { NoUseBehaviour } from "../entities/ItemBehaviour/NoUseBehaviour";
 import { NoBreakBehaviour } from "../entities/ItemBehaviour/NoBreakBehaviour";
-import { NoPickupBehaviour } from "../entities/ItemBehaviour/NoPickupBehaviour";
 import { ExpandInventoryUseBehaviour } from "../entities/ItemBehaviour/ExpandInventoryUseBehaviour";
-import { StandardPickupBehaviour } from "../entities/ItemBehaviour/StandardPickupBehaviour";
 import { BedUseBehaviour } from "../entities/ItemBehaviour/BedUseBehaviour";
 
 export class GameData {
@@ -15,10 +13,7 @@ export class GameData {
     public static init(container: Container) {
         // Behaviours
         const noUseBehaviour = container.get(NoUseBehaviour)
-        const noPickupBehaviour = container.get(NoPickupBehaviour)
         const noBreakBehaviour = container.get(NoBreakBehaviour)
-
-        const standardPickupBehaviour = container.get(StandardPickupBehaviour)
 
         const bedUseBehaviour = container.get(BedUseBehaviour)
 
@@ -30,9 +25,9 @@ export class GameData {
         const P1R1_BATHROOM = new Room("P1R1_BATHROOM", "Bathroom")
 
         // Items
-        const bed = new Item("Bed", bedUseBehaviour, noBreakBehaviour, noPickupBehaviour)
-        const deadPlant = new Item("Dead Plant", noUseBehaviour, noBreakBehaviour, noPickupBehaviour)
-        const backpack = new Item("BackPack", expandInventoryBehaviour, noBreakBehaviour, standardPickupBehaviour, "A brown backpack in OK condition, perhaps I could use it?")
+        const bed = new Item("Bed", bedUseBehaviour, noBreakBehaviour)
+        const deadPlant = new Item("Dead Plant", noUseBehaviour, noBreakBehaviour)
+        const backpack = new Item("BackPack", expandInventoryBehaviour, noBreakBehaviour, true, "A brown backpack in OK condition, perhaps I could use it?")
 
         // Add items to rooms
         P1R1_BEDROOM.addItem(bed)

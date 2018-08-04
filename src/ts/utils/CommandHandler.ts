@@ -9,6 +9,7 @@ import { IItem } from "../abstract/entities/IItem";
 import { IRoomManager } from "../abstract/utils/IRoomManager";
 import { CommandType } from "../constants/CommandTypes";
 import { ICommandHandler } from "../abstract/utils/ICommandHandler";
+import { getRandomCanNotPickupMessage } from "../constants/Messages";
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
@@ -126,7 +127,14 @@ export class CommandHandler implements ICommandHandler {
                 
                 const object: IItem | null = this.player.location.getItemByName(command.arguments)
                 if(object) {
-                    return object.pickup()
+                    if(!object.pickupable) {
+                        return this.outputHandler.println(getRandomCanNotPickupMessage())
+                    }
+                    if(this.player.pickupItem(object)) {
+                        this.player.location.removeItem(object)
+                        return this.outputHandler.println(`Picked up ${object.itemName}`)
+                    }
+                    return this.outputHandler.println("Unable to pick up object")
                 }
                 return this.outputHandler.println("Object not found")
             }

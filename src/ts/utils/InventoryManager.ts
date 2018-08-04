@@ -67,10 +67,11 @@ export class InventoryManager implements IInventoryManager {
         return this.inventory.items.map((item: IItem) => item.itemName).includes(itemName)
     }
 
-    /**
-     * @returns string of items
-     */
     toString(): string {
         return this.inventory.toString()
+    }
+
+    consumeExpansionPack(item: IItem) {
+        // Temp
     }
 }

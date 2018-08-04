@@ -8,7 +8,7 @@ export class Item implements IItem {
         public readonly itemName: string, 
         private readonly useBehaviour: IUseBehaviour,
         private readonly breakBehaviour: IBreakBehaviour,
-        private readonly pickupBehaviour: IPickupBehaviour,
+        public readonly pickupable: boolean = false,
         public readonly info: string = ""
     ) { }
 
@@ -18,10 +18,6 @@ export class Item implements IItem {
 
     public break(): void {
         this.breakBehaviour.break(this)
-    }
-
-    public pickup(): void {
-        this.pickupBehaviour.pickup(this)
     }
 
     public toString(): string {
