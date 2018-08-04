@@ -12,7 +12,7 @@ export class NoUseBehaviour implements IUseBehaviour {
         @inject(TYPES.OutputHandler) private outputHandler: IOutputHandler
     ) {}
 
-    use(item: IItem): void {
+    use(): void {
         this.outputHandler.println(getRandomCanNotUseMessage())
     }
 }

@@ -10,7 +10,7 @@ export class BedUseBehaviour implements IUseBehaviour {
         @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler
     ) {}
     
-    use(item: IItem): void {
+    use(): void {
         this.outputHandler.println("This bed looks a bit dirty and has mold spots, besides I just woke up")
     }
 }

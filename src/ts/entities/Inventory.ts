@@ -29,7 +29,8 @@ export class Inventory implements IInventory {
      * @returns true or false 
      */
     public removeItem(item: IItem): boolean {
-        return false
+        this.items = this.items.filter((inventoryItem: IItem) => inventoryItem !== item)
+        return true
     }
 
     /**

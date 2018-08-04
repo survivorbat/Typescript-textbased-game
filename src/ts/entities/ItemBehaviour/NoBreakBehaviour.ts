@@ -13,7 +13,7 @@ export class NoBreakBehaviour implements IBreakBehaviour {
         @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler
     ) {}
 
-    break(item: IItem): void {
+    break(): void {
         this.outputHandler.println(getRandomCanNotBreakMessage())
     }
 }

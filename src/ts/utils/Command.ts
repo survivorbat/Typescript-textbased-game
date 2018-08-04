@@ -2,15 +2,10 @@ import { ICommand } from "../abstract/utils/ICommand";
 import { CommandType, getCommandTypeFromString } from "../constants/CommandTypes";
 
 export class Command implements ICommand {
-    // The first word of the command
     private readonly _command: CommandType
 
-    // The rest of the command
     private readonly _arguments: string = ""
     
-    /**
-     * @param commandAsText the command
-     */
     constructor(
         private readonly _commandAsText: string
     ) {
@@ -22,23 +17,14 @@ export class Command implements ICommand {
         }
     }
 
-    /**
-     * @returns command as text
-     */
     get commandAsText(): string {
         return this._commandAsText
     }
 
-    /**
-     * @returns command
-     */
     get command(): CommandType {
         return this._command
     }
 
-    /**
-     * @returns arguments
-     */
     get arguments(): string {
         return this._arguments
     }

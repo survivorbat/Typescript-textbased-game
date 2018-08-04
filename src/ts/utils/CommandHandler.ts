@@ -136,7 +136,7 @@ export class CommandHandler implements ICommandHandler {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
                 }
-                const object: IItem | null = this.player.location.getItemByName(command.arguments)
+                const object: IItem | null = this.player.location.getItemByName(command.arguments) || this.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === command.arguments)[0]
                 if(object) {
                     return object.use()
                 }
