@@ -29,6 +29,7 @@ export class CommandHandler implements ICommandHandler {
             // Display a list of commands
             case CommandType.help: {
                 this.outputHandler.println("Available commands:")
+                this.outputHandler.setNextLineTextColor(COLORS.BLUE)
                 this.outputHandler.println("---------------------------------------------")
                 this.outputHandler.println("help - Get a list of commands")
                 this.outputHandler.println("inventory - View your current inventory")
@@ -44,6 +45,7 @@ export class CommandHandler implements ICommandHandler {
                 this.outputHandler.println("info <item> - Study an item in your inventory")
                 this.outputHandler.println("drop <item> - Drop item from your inventory")
                 this.outputHandler.println("---------------------------------------------")
+                this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
 
@@ -55,13 +57,19 @@ export class CommandHandler implements ICommandHandler {
 
             // Command that shows the inventory size, maxsize and items
             case CommandType.inventory: {
-                this.outputHandler.println(`Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}): ${this.inventoryManager.toString()}`)
+                this.outputHandler.println(`Inventory (${this.inventoryManager.getAmountOfItems()}/${this.inventoryManager.getMaxItems()}):`)
+                this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+                this.outputHandler.println(`${this.inventoryManager.toString()}`)
+                this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
 
             // Current location of the player
             case CommandType.location: {
-                this.outputHandler.println(`Player location: ${this.player.location? this.player.location.roomName : "Unknown"}`)
+                this.outputHandler.println(`Player location:`)
+                this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+                this.outputHandler.println(`${this.player.location? this.player.location.roomName : "Unknown"}`)
+                this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
 
@@ -70,14 +78,20 @@ export class CommandHandler implements ICommandHandler {
                 if(!this.player.location) {
                     return this.outputHandler.println("Unknown location")
                 }
-                this.outputHandler.println(`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to: ${this.player.location.getAdjacentRoomNames()}`)
+                this.outputHandler.println(`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`)
+                this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+                this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`)
+                this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
 
             // Observe current location
             case CommandType.observe: {
                 if(this.player.location) {
-                    this.outputHandler.println(`You observe the following items: ${this.player.location.getItemNames()} and ${this.player.location.getAmountOfAdjacentRooms()} door(s)`)
+                    this.outputHandler.println(`You observe the following items:`)
+                    this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+                    this.outputHandler.println(`${this.player.location.getItemNames()}`)
+                    this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 } else {
                     this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
                     this.outputHandler.println("Unknown location")

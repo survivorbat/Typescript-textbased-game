@@ -38,18 +38,14 @@ export class RoomManager implements IRoomManager {
      * @returns room or null
      */
     getRoom(name: string): IRoom | null {
-        name = name.trim().toLowerCase()
+        let getRoom = null
         if(this.player.location) {
-            if(this.player.location.roomRight && this.player.location.roomRight.roomName.toLowerCase() === name) {
-                return this.player.location.roomRight
-            } else if(this.player.location.roomLeft && this.player.location.roomLeft.roomName.toLowerCase() === name) {
-                return this.player.location.roomLeft
-            } else if(this.player.location.roomUp && this.player.location.roomUp.roomName.toLowerCase() === name) {
-                return this.player.location.roomUp
-            } else if(this.player.location.roomDown && this.player.location.roomDown.roomName.toLowerCase() === name) {
-                return this.player.location.roomDown
-            }
+            this.player.location.adjacentRooms.forEach((room: IRoom) => {
+                if(room.roomName.toLowerCase().trim() === name) {
+                    getRoom = room
+                }
+            });
         }
-        return null
+        return getRoom
     }
 }

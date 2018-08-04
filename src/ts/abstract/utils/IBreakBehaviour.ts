@@ -1,3 +1,5 @@
+import { IItem } from "../entities/IItem";
+
 export interface IBreakBehaviour {
-    break(): void
+    break(item: IItem): void
 }

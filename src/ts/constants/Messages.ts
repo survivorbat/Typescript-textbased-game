@@ -8,5 +8,23 @@ const canNotPickupMessages: Array<string> = [
 ]
 
 export function getRandomCanNotPickupMessage(): string {
-    return canNotPickupMessages[Math.round(Math.random()*canNotPickupMessages.length)]
+    return canNotPickupMessages[Math.floor(Math.random()*canNotPickupMessages.length)]
+}
+
+const canNotBreakMessages: Array<string> = [
+    "I can't break that",
+    "Why would I do that?"
+]
+
+export function getRandomCanNotBreakMessage(): string {
+    return canNotBreakMessages[Math.floor(Math.random()*canNotBreakMessages.length)]
+}
+
+const canNotUseMessages: Array<string> = [
+    "I can't use that",
+    "How would I use that?"
+]
+
+export function getRandomCanNotUseMessage(): string {
+    return canNotUseMessages[Math.floor(Math.random()*canNotUseMessages.length)]
 }

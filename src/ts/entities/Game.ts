@@ -40,8 +40,13 @@ export class Game {
                 Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition-1).commandAsText
             } else if(event.keyCode === 40) {
                 Elements.inputElement.value = this.inputHandler.getCommand(this.inputHandler.commandHistoryPosition+1).commandAsText
+            } else if(event.keyCode === 27) {
+                Elements.inputElement.value = ""
             }
-            Elements.inputElement.setSelectionRange(Elements.inputElement.value.length, Elements.inputElement.value.length)
+        })
+
+        Elements.outputElement.addEventListener("click", (event: Event) => {
+            Elements.inputElement.focus()
         })
     }
 

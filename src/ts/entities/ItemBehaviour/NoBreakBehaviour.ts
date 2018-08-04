@@ -1,18 +1,19 @@
-import { IPickupBehaviour } from "../../abstract/utils/IPickupBehaviour";
+import { IBreakBehaviour } from "../../abstract/utils/IBreakBehaviour";
 import { IRoomManager } from "../../abstract/utils/IRoomManager";
 import { inject, injectable } from "../../../../node_modules/inversify";
 import { TYPES } from "../../constants/Types";
 import { IOutputHandler } from "../../abstract/utils/IOutputHandler";
-import { getRandomCanNotPickupMessage } from "../../constants/Messages";
+import { getRandomCanNotBreakMessage } from "../../constants/Messages";
+import { IItem } from "../../abstract/entities/IItem";
 
 @injectable()
-export class BedPickupBehaviour implements IPickupBehaviour {
+export class NoBreakBehaviour implements IBreakBehaviour {
 
     constructor(
         @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler
     ) {}
 
-    pickup(): void {
-        this.outputHandler.println(getRandomCanNotPickupMessage())
+    break(item: IItem): void {
+        this.outputHandler.println(getRandomCanNotBreakMessage())
     }
 }

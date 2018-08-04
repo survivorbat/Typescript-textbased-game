@@ -6,18 +6,6 @@ export class Room implements IRoom {
     // Text once you enter the room
     startText?: string
 
-    // Room to the left
-    roomLeft?: IRoom
-
-    // Room to the right
-    roomRight?: IRoom
-
-    // Room upwards
-    roomUp?: IRoom
-
-    // Room down
-    roomDown?: IRoom
-
     // Locked
     locked: boolean = false
 
@@ -30,7 +18,8 @@ export class Room implements IRoom {
      */
     constructor(
         public readonly roomCode: string, 
-        public readonly roomName: string
+        public readonly roomName: string,
+        public adjacentRooms: Array<IRoom> = new Array<IRoom>()
     ) { }
 
     /**
@@ -63,13 +52,8 @@ export class Room implements IRoom {
      */
     getItemNames(): string {
         let result = ""
-        this.items.forEach((item: IItem, key: number) => {
-            result += item.itemName
-            if(this.items[key+1]) {
-                result += ", "
-            }
-        })
-        return result.trim()
+        result = this.items.reduce((previous, current) => `${previous} ${current.itemName},`,"")
+        return result.trim().substring(0, result.length-2)
     }
 
     /**
@@ -83,39 +67,27 @@ export class Room implements IRoom {
      * @returns a string containing the room names
      */
     getAdjacentRoomNames(): string {
-        let result = ""
-        if(this.roomDown) {
-            result += this.roomDown.roomName + " "
-        }
-        if(this.roomUp) {
-            result += this.roomUp.roomName + " "
-        }
-        if(this.roomRight) {
-            result += this.roomRight.roomName + " "
-        }
-        if(this.roomLeft) {
-            result += this.roomLeft.roomName + " "
-        }
-        return result.trim()
+        return this.adjacentRooms.reduce((previous, current) => `${previous} ${current.roomName}`,"")
     }
 
     /** 
      * @returns number of adjacent rooms
      */
     getAmountOfAdjacentRooms(): number {
-        let number = 0
-        if(this.roomDown) {
-            number++
-        }
-        if(this.roomUp) {
-            number++
-        }
-        if(this.roomRight) {
-            number++
-        }
-        if(this.roomLeft) {
-            number++
-        }
-        return number
+        return this.adjacentRooms.length
+    }
+
+    /**
+     * @param room to add
+     */
+    addAdjacentRoom(room: IRoom): void {
+        this.adjacentRooms.push(room)
+    }
+
+    /**
+     * @param room to remove
+     */
+    removeAdjacentRoom(room: IRoom): void {
+        this.adjacentRooms = this.adjacentRooms.filter((selectedRoom: IRoom) => selectedRoom.roomCode !== room.roomCode)
     }
 }

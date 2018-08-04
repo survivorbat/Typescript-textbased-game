@@ -6,30 +6,30 @@ import { IPickupBehaviour } from "../abstract/utils/IPickupBehaviour";
 export class Item implements IItem {
     constructor(
         public readonly itemName: string, 
-        public readonly info: string = "",
         private readonly useBehaviour: IUseBehaviour,
         private readonly breakBehaviour: IBreakBehaviour,
-        private readonly pickupBehaviour: IPickupBehaviour
+        private readonly pickupBehaviour: IPickupBehaviour,
+        public readonly info: string = ""
     ) { }
 
     /**
      * Use the item
      */
     public use(): void {
-        this.useBehaviour.use()
+        this.useBehaviour.use(this)
     } 
     /**
      * Break the item
      */
     public break(): void {
-        this.breakBehaviour.break()
+        this.breakBehaviour.break(this)
     }
 
     /**
      * pickup the item
      */
     public pickup(): void {
-        this.pickupBehaviour.pickup()
+        this.pickupBehaviour.pickup(this)
     }
 
     /**

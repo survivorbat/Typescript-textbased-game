@@ -7,7 +7,7 @@ body {
 }
 
 #gamearea {
-    max-height: 95vh;
+    height: 95vh;
     overflow-y: auto;
     div, span {
         padding: 0.2em 0;
@@ -26,8 +26,8 @@ body {
     border-width: 1px;
 
     font-family: $terminalfont;
-    padding: 0.5em;
-    font-size: 0.9em;
+    padding: 0.6em;
+    font-size: 1em;
 
     input {
         width: 95%;

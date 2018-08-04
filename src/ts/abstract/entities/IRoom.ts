@@ -7,10 +7,7 @@ export interface IRoom {
     roomName: string
     startText?: string
 
-    roomLeft?: IRoom
-    roomRight?: IRoom
-    roomUp?: IRoom
-    roomDown?: IRoom
+    adjacentRooms: Array<IRoom>
 
     locked: boolean
 
@@ -23,5 +20,7 @@ export interface IRoom {
     getItemNames(): string
     getAdjacentRoomNames(): string
     getAmountOfAdjacentRooms(): number
+    addAdjacentRoom(room: IRoom): void
+    removeAdjacentRoom(room: IRoom): void
     init(outputHandler: IOutputHandler): void
 }

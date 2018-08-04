@@ -1,3 +1,5 @@
+import { IItem } from "../entities/IItem";
+
 export interface IPickupBehaviour {
-    pickup(): void
+    pickup(item: IItem): void
 }

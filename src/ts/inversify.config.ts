@@ -17,14 +17,8 @@ import { IRoomManager } from "./abstract/utils/IRoomManager";
 import { RoomManager } from "./utils/RoomManager";
 import { ICommandHandler } from "./abstract/utils/ICommandHandler";
 import { CommandHandler } from "./utils/CommandHandler";
-import { IUseBehaviour } from "./abstract/utils/IUseBehaviour";
-import { IBreakBehaviour } from "./abstract/utils/IBreakBehaviour";
-import { IPickupBehaviour } from "./abstract/utils/IPickupBehaviour";
-import { BedUseBehaviour } from "./entities/ItemBehaviour/BedUseBehaviour";
-import { BedBreakBehaviour } from "./entities/ItemBehaviour/BedBreakBehaviour";
-import { BedPickupBehaviour } from "./entities/ItemBehaviour/BedPickupBehaviour";
 
-const container = new Container()
+const container = new Container({autoBindInjectable: true})
 container.bind<IOutputHandler>(TYPES.OutputHandler).to(OutputHandler)
 container.bind<IInputHandler>(TYPES.InputHandler).to(InputHandler)
 container.bind<IGame>(TYPES.Game).to(Game)
@@ -33,9 +27,5 @@ container.bind<IInventory>(TYPES.Inventory).to(Inventory).inSingletonScope()
 container.bind<IInventoryManager>(TYPES.InventoryManager).to(InventoryManager)
 container.bind<IRoomManager>(TYPES.RoomManager).to(RoomManager)
 container.bind<ICommandHandler>(TYPES.CommandHandler).to(CommandHandler)
-
-container.bind<IUseBehaviour>(TYPES.BedUseBehaviour).to(BedUseBehaviour)
-container.bind<IBreakBehaviour>(TYPES.BedBreakBehaviour).to(BedBreakBehaviour)
-container.bind<IPickupBehaviour>(TYPES.BedPickupBehaviour).to(BedPickupBehaviour)
 
 export { container }

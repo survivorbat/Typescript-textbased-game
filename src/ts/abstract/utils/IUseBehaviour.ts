@@ -1,3 +1,5 @@
+import { IItem } from "../entities/IItem";
+
 export interface IUseBehaviour {
-    use(): void
+    use(item: IItem): void
 }
