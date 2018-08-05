@@ -8,7 +8,8 @@ body {
   overflow-y: auto; }
   #gamearea div,
   #gamearea span {
-    padding: 0.2em 0; }
+    padding: 0.2em 0;
+    white-space: pre-wrap; }
 
 #inputarea {
   position: fixed;
@@ -30,4 +31,4 @@ body {
     #inputarea input:focus {
       outline: none; }
 
-/*# sourceMappingURL=main.e29fb72e4bb1f0abb33f.css.map*/
+/*# sourceMappingURL=main.ed32a3dd08ac3dd80d8e.css.map*/
