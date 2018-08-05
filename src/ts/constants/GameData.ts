@@ -4,8 +4,8 @@ import { IRoom } from "../abstract/entities/IRoom";
 import { Container } from "../../../node_modules/inversify";
 import { NoUseBehaviour } from "../entities/ItemBehaviour/NoUseBehaviour";
 import { NoBreakBehaviour } from "../entities/ItemBehaviour/NoBreakBehaviour";
-import { ExpandInventoryUseBehaviour } from "../entities/ItemBehaviour/ExpandInventoryUseBehaviour";
 import { BedUseBehaviour } from "../entities/ItemBehaviour/BedUseBehaviour";
+import { ExpansionKit } from "../entities/specialitems/ExpansionKit";
 
 export class GameData {
     public static START: IRoom
@@ -17,8 +17,6 @@ export class GameData {
 
         const bedUseBehaviour = container.get(BedUseBehaviour)
 
-        const expandInventoryBehaviour = container.get(ExpandInventoryUseBehaviour)
-
         // Rooms
         const P1R1_BEDROOM = new Room("P1R1_START", "Bedroom")
         const P1R1_HALLWAY = new Room("P1R1_HALLWAY", "Hallway")
@@ -27,7 +25,7 @@ export class GameData {
         // Items
         const bed = new Item("Bed", bedUseBehaviour, noBreakBehaviour)
         const deadPlant = new Item("Dead Plant", noUseBehaviour, noBreakBehaviour)
-        const backpack = new Item("BackPack", expandInventoryBehaviour, noBreakBehaviour, true, "A brown backpack in OK condition, perhaps I could use it?")
+        const backpack = new ExpansionKit("BackPack", 3, "A brown backpack in OK condition, perhaps I could use it?")
 
         // Add items to rooms
         P1R1_BEDROOM.addItem(bed)

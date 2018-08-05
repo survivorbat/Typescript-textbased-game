@@ -9,6 +9,7 @@ import { IRoomManager } from "../abstract/utils/IRoomManager";
 import { CommandType } from "../constants/CommandTypes";
 import { ICommandHandler } from "../abstract/utils/ICommandHandler";
 import { getRandomCanNotPickupMessage } from "../constants/Messages";
+import { ExpansionKit } from "../entities/specialitems/ExpansionKit";
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
@@ -23,8 +24,13 @@ export class CommandHandler implements ICommandHandler {
      * @param command the command that needs to be executed
      */
     public executeCommand(command: ICommand): void {
-        switch(command.command) {
+        if(!this.player.location) {
+            this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
+            this.outputHandler.println("Unknown player location")
+            return this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
+        }
 
+        switch(command.command) {
             // Display a list of commands
             case CommandType.help: {
                 this.outputHandler.println("Available commands:")
@@ -67,16 +73,13 @@ export class CommandHandler implements ICommandHandler {
             case CommandType.location: {
                 this.outputHandler.println(`Player location:`)
                 this.outputHandler.setNextLineTextColor(COLORS.BLUE)
-                this.outputHandler.println(`${this.player.location? this.player.location.roomName : "Unknown"}`)
+                this.outputHandler.println(`${this.player.location.roomName}`)
                 this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
                 break
             }
 
             // Get a list of adjacent rooms
             case CommandType.doors: {
-                if(!this.player.location) {
-                    return this.outputHandler.println("Unknown location")
-                }
                 this.outputHandler.println(`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`)
                 this.outputHandler.setNextLineTextColor(COLORS.BLUE)
                 this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`)
@@ -86,16 +89,9 @@ export class CommandHandler implements ICommandHandler {
 
             // Observe current location
             case CommandType.observe: {
-                if(this.player.location) {
-                    this.outputHandler.println(`You observe the following items:`)
-                    this.outputHandler.setNextLineTextColor(COLORS.BLUE)
-                    this.outputHandler.println(`${this.player.location.getItemNames()}`)
-                    this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
-                } else {
-                    this.outputHandler.setNextLineTextColor(COLORS.YELLOW)
-                    this.outputHandler.println("Unknown location")
-                    this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN)
-                }
+                this.outputHandler.println(`You observe the following items:`)
+                this.outputHandler.setNextLineTextColor(COLORS.BLUE)
+                this.outputHandler.println(`${this.player.location.getItemNames()}`)
                 break
             }
 
@@ -119,10 +115,6 @@ export class CommandHandler implements ICommandHandler {
 
             // Pickup an item in the room
             case CommandType.pickup: {
-                if(!this.player.location) {
-                    return this.outputHandler.println("Unknown location")
-                }
-                
                 const object: IItem | null = this.player.location.getItemByName(command.arguments)
                 if(object) {
                     if(!object.pickupable) {
@@ -139,10 +131,11 @@ export class CommandHandler implements ICommandHandler {
 
             // Use an item
             case CommandType.use: {
-                if(!this.player.location) {
-                    return this.outputHandler.println("Unknown location")
-                }
                 const object: IItem | null = this.player.location.getItemByName(command.arguments) || this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === command.arguments)[0]
+                if(object instanceof ExpansionKit) {
+                    return this.player.inventoryManager.consumeExpansionPack(object)
+                }
+                
                 if(object) {
                     return object.use()
                 }

@@ -4,6 +4,8 @@ import { inject } from "inversify"
 import { TYPES } from "../constants/Types";
 import { injectable } from "../../../node_modules/inversify";
 import { IItem } from "../abstract/entities/IItem";
+import { IOutputHandler } from "../abstract/utils/IOutputHandler";
+import { ExpansionKit } from "../entities/specialitems/ExpansionKit";
 
 @injectable()
 export class InventoryManager implements IInventoryManager {
@@ -12,7 +14,8 @@ export class InventoryManager implements IInventoryManager {
      * @param inventory inventory object
      */
     constructor(
-        @inject(TYPES.Inventory) private readonly inventory: IInventory
+        @inject(TYPES.Inventory) private readonly inventory: IInventory,
+        @inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler
     ) { }
 
     /**
@@ -70,8 +73,14 @@ export class InventoryManager implements IInventoryManager {
     toString(): string {
         return this.inventory.toString()
     }
-
-    consumeExpansionPack(item: IItem) {
-        // Temp
+    
+    /**
+     * Consume expansion pack
+     * @param item to be consumed
+     */
+    consumeExpansionPack(expansionKit: ExpansionKit) {
+        this.outputHandler.println(`You equipped a backpack, you now have ${expansionKit.size} more inventory slots`)
+        this.setMaxItems(this.getMaxItems() + expansionKit.size)
+        this.removeItem(expansionKit)
     }
 }
