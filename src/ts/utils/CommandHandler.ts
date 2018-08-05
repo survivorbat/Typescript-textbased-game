@@ -10,13 +10,15 @@ import { CommandType } from '../constants/CommandTypes';
 import { ICommandHandler } from '../abstract/utils/ICommandHandler';
 import { getRandomCanNotPickupMessage } from '../constants/Messages';
 import { ExpansionKit } from '../entities/specialitems/ExpansionKit';
+import { IMapGenerator } from '../abstract/utils/IMapGenerator';
 
 @injectable()
 export class CommandHandler implements ICommandHandler {
 	constructor(
-		@inject(TYPES.OutputHandler) public readonly outputHandler: IOutputHandler,
-		@inject(TYPES.Player) public readonly player: IPlayer,
-		@inject(TYPES.RoomManager) public readonly roomManager: IRoomManager
+		@inject(TYPES.OutputHandler) private readonly outputHandler: IOutputHandler,
+		@inject(TYPES.Player) private readonly player: IPlayer,
+		@inject(TYPES.RoomManager) private readonly roomManager: IRoomManager,
+		@inject(TYPES.MapGenerator) private readonly mapGenerator: IMapGenerator
 	) {}
 
 	/**
@@ -101,6 +103,11 @@ export class CommandHandler implements ICommandHandler {
 				if (!this.roomManager.moveToRoom(room)) {
 					return this.outputHandler.println('Unable to move to this room');
 				}
+				break;
+			}
+
+			case CommandType.map: {
+				this.mapGenerator.generateMap(this.player.location);
 				break;
 			}
 

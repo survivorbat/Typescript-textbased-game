@@ -10,7 +10,8 @@ export enum CommandType {
 	pickup,
 	unknown,
 	info,
-	drop
+	drop,
+	map
 }
 
 export function getCommandTypeFromString(command: string): CommandType {
@@ -38,6 +39,8 @@ export function getCommandTypeFromString(command: string): CommandType {
 			return CommandType.info;
 		case 'drop':
 			return CommandType.drop;
+		case 'map':
+			return CommandType.map;
 		default:
 			return CommandType.unknown;
 	}

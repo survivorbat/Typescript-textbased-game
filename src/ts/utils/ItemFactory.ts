@@ -24,7 +24,16 @@ export class ItemFactory implements IItemFactory {
 			new Item('Bed', bedUseBehaviour, noBreakBehaviour),
 			new Item('Toilet', toiletUseBehaviour, noBreakBehaviour),
 			new Item('Shower curtain', noUseBehaviour, noBreakBehaviour),
-			new Item('Shower head', noUseBehaviour, noBreakBehaviour)
+			new Item('Shower head', noUseBehaviour, noBreakBehaviour),
+			new Item('Wooden desk', noUseBehaviour, noBreakBehaviour),
+			new Item('Empty book shelf', noUseBehaviour, noBreakBehaviour),
+			new Item(
+				'Book with mold spots',
+				noUseBehaviour,
+				noBreakBehaviour,
+				true,
+				"I can't decipher what this book was once used for, it is too molded"
+			)
 		];
 		this.randomItems = [
 			new Item('Dead Plant', noUseBehaviour, noBreakBehaviour),
@@ -40,9 +49,16 @@ export class ItemFactory implements IItemFactory {
 			),
 			new Item('Small file cabinet', noUseBehaviour, noBreakBehaviour),
 			new Item('Radiator on the wall', noUseBehaviour, noBreakBehaviour),
-			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour),
+			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour, true, 'Some wooden parts'),
 			new Item('An empty canvas on the wall', noUseBehaviour, noBreakBehaviour),
-			new Item('A sketch painting on the wall', noUseBehaviour, noBreakBehaviour)
+			new Item('Sketch painting on the wall', noUseBehaviour, noBreakBehaviour),
+			new Item(
+				'Piece of paper with yellow stains',
+				noUseBehaviour,
+				noBreakBehaviour,
+				true,
+				'A blank piece of paper that seems unusable, it has a lot of yellow stains on it'
+			)
 		];
 	}
 

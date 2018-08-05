@@ -9,7 +9,8 @@ import { IItem } from '../abstract/entities/IItem';
 @injectable()
 export class Player implements IPlayer {
 	// Current room
-	public location?: IRoom;
+	private _location?: IRoom;
+	public roomsVisited: Array<IRoom> = new Array<IRoom>();
 
 	constructor(
 		@inject(TYPES.Inventory) private readonly inventory: IInventory,
@@ -18,5 +19,14 @@ export class Player implements IPlayer {
 
 	public pickupItem(item: IItem): boolean {
 		return this.inventoryManager.addItem(item);
+	}
+
+	get location(): IRoom | undefined {
+		return this._location;
+	}
+
+	set location(location: IRoom | undefined) {
+		location && !this.roomsVisited.includes(location) ? this.roomsVisited.push(location) : null;
+		this._location = location;
 	}
 }

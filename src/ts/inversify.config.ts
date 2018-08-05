@@ -19,6 +19,8 @@ import { ICommandHandler } from './abstract/utils/ICommandHandler';
 import { CommandHandler } from './utils/CommandHandler';
 import { IItemFactory } from './abstract/utils/IItemFactory';
 import { ItemFactory } from './utils/ItemFactory';
+import { IMapGenerator } from './abstract/utils/IMapGenerator';
+import { MapGenerator } from './utils/MapGenerator';
 
 const container = new Container({ autoBindInjectable: true });
 container.bind<IOutputHandler>(TYPES.OutputHandler).to(OutputHandler);
@@ -30,5 +32,6 @@ container.bind<IInventoryManager>(TYPES.InventoryManager).to(InventoryManager);
 container.bind<IRoomManager>(TYPES.RoomManager).to(RoomManager);
 container.bind<ICommandHandler>(TYPES.CommandHandler).to(CommandHandler);
 container.bind<IItemFactory>(TYPES.ItemFactory).to(ItemFactory);
+container.bind<IMapGenerator>(TYPES.MapGenerator).to(MapGenerator);
 
 export { container };
