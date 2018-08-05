@@ -20,23 +20,31 @@ export class GameData {
 		// Items
 		const bed = itemFactory.getItem('Bed');
 		const backpack = new ExpansionKit('BackPack', 3, 'A brown backpack in OK condition, perhaps I could use it?');
+		const toilet = itemFactory.getItem('Toilet');
+		const showerCurtain = itemFactory.getItem('Shower curtain');
+		const showerHead = itemFactory.getItem('Shower head');
 
 		// Add items to rooms
 		P1R1_BEDROOM.addItem(bed);
-		P1R1_BEDROOM.addItem(itemFactory.getRandomItem(false));
-		P1R1_BEDROOM.addItem(itemFactory.getRandomItem(false));
+		P1R1_BEDROOM.addItem(itemFactory.getRandomItem());
+		P1R1_BEDROOM.addItem(itemFactory.getRandomItem());
 		P1R1_BEDROOM.addItem(backpack);
 
-		P1R1_HALLWAY.addItem(itemFactory.getRandomItem(false));
-		P1R1_HALLWAY.addItem(itemFactory.getRandomItem(false));
-		P1R1_HALLWAY.addItem(itemFactory.getRandomItem(false));
+		P1R1_HALLWAY.addItem(itemFactory.getRandomItem());
+		P1R1_HALLWAY.addItem(itemFactory.getRandomItem());
+		P1R1_HALLWAY.addItem(itemFactory.getRandomItem());
+
+		P1R1_BATHROOM.addItem(toilet);
+		P1R1_BATHROOM.addItem(showerCurtain);
+		P1R1_BATHROOM.addItem(showerHead);
+		P1R1_BATHROOM.addItem(itemFactory.getRandomItem());
 
 		// Add initial text to rooms
 		P1R1_BEDROOM.startText =
 			'The bedroom is dusty and looks dilapidated, judging from the bed it looks like a bedroom';
 		P1R1_HALLWAY.startText = "It's a rather long rectangular hallway with brown carpet and blue walls";
 		P1R1_BATHROOM.startText =
-			'This bathroom stinks terribly, there is mold all over the walls and the toilet looks';
+			'This bathroom stinks terribly, there is mold all over the walls and the toilet looks disgusting';
 
 		// Apply connections
 		P1R1_BEDROOM.addAdjacentRoom(P1R1_HALLWAY);
