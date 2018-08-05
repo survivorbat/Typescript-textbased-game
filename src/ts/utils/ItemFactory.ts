@@ -19,15 +19,14 @@ export class ItemFactory implements IItemFactory {
         @inject(BedUseBehaviour) private readonly bedUseBehaviour: IUseBehaviour
     ) {
         this.items = [
-            new Item("Bed", bedUseBehaviour, noBreakBehaviour),
-            new Item("Dead Plant", noUseBehaviour, noBreakBehaviour)
+            new Item("Bed", bedUseBehaviour, noBreakBehaviour)
         ]
         this.randomItems = [
             new Item("Dead Plant", noUseBehaviour, noBreakBehaviour),
             new Item("Small table", noUseBehaviour, noBreakBehaviour),
             new Item("Broken lamp", noUseBehaviour, noBreakBehaviour),
-            new Item("Broken lamp", noUseBehaviour, noBreakBehaviour),
-            new Item("Broken lamp", noUseBehaviour, noBreakBehaviour),
+            new Item("A large pile of dust", noUseBehaviour, noBreakBehaviour),
+            new Item("A cardboard box", noUseBehaviour, noBreakBehaviour),
             new Item("Small file cabinet", noUseBehaviour, noBreakBehaviour),
             new Item("Radiator on the wall", noUseBehaviour, noBreakBehaviour),
         ]
