@@ -6,7 +6,8 @@ body {
 #gamearea {
   height: 95vh;
   overflow-y: auto; }
-  #gamearea div, #gamearea span {
+  #gamearea div,
+  #gamearea span {
     padding: 0.2em 0; }
 
 #inputarea {
@@ -29,4 +30,4 @@ body {
     #inputarea input:focus {
       outline: none; }
 
-/*# sourceMappingURL=main.4aaa6e02f33889ba9f6f.css.map*/
+/*# sourceMappingURL=main.a40a7ddb7de39e4188c1.css.map*/
