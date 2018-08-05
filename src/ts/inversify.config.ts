@@ -17,6 +17,8 @@ import { IRoomManager } from "./abstract/utils/IRoomManager";
 import { RoomManager } from "./utils/RoomManager";
 import { ICommandHandler } from "./abstract/utils/ICommandHandler";
 import { CommandHandler } from "./utils/CommandHandler";
+import { IItemFactory } from "./abstract/utils/IItemFactory";
+import { ItemFactory } from "./utils/ItemFactory";
 
 const container = new Container({autoBindInjectable: true})
 container.bind<IOutputHandler>(TYPES.OutputHandler).to(OutputHandler)
@@ -27,5 +29,6 @@ container.bind<IInventory>(TYPES.Inventory).to(Inventory).inSingletonScope()
 container.bind<IInventoryManager>(TYPES.InventoryManager).to(InventoryManager)
 container.bind<IRoomManager>(TYPES.RoomManager).to(RoomManager)
 container.bind<ICommandHandler>(TYPES.CommandHandler).to(CommandHandler)
+container.bind<IItemFactory>(TYPES.ItemFactory).to(ItemFactory)
 
 export { container }

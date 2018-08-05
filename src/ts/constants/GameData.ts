@@ -6,16 +6,15 @@ import { NoUseBehaviour } from "../entities/ItemBehaviour/NoUseBehaviour";
 import { NoBreakBehaviour } from "../entities/ItemBehaviour/NoBreakBehaviour";
 import { BedUseBehaviour } from "../entities/ItemBehaviour/BedUseBehaviour";
 import { ExpansionKit } from "../entities/specialitems/ExpansionKit";
+import { IItemFactory } from "../abstract/utils/IItemFactory";
+import { TYPES } from "./Types";
 
 export class GameData {
     public static START: IRoom
 
     public static init(container: Container) {
         // Behaviours
-        const noUseBehaviour = container.get(NoUseBehaviour)
-        const noBreakBehaviour = container.get(NoBreakBehaviour)
-
-        const bedUseBehaviour = container.get(BedUseBehaviour)
+        const itemFactory = container.get<IItemFactory>(TYPES.ItemFactory)
 
         // Rooms
         const P1R1_BEDROOM = new Room("P1R1_START", "Bedroom")
@@ -23,8 +22,8 @@ export class GameData {
         const P1R1_BATHROOM = new Room("P1R1_BATHROOM", "Bathroom")
 
         // Items
-        const bed = new Item("Bed", bedUseBehaviour, noBreakBehaviour)
-        const deadPlant = new Item("Dead Plant", noUseBehaviour, noBreakBehaviour)
+        const bed = itemFactory.getItem("Bed")
+        const deadPlant = itemFactory.getItem("Dead plant")
         const backpack = new ExpansionKit("BackPack", 3, "A brown backpack in OK condition, perhaps I could use it?")
 
         // Add items to rooms
