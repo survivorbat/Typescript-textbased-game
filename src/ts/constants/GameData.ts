@@ -13,7 +13,7 @@ export class GameData {
     public static START: IRoom
 
     public static init(container: Container) {
-        // Behaviours
+        // Factory
         const itemFactory = container.get<IItemFactory>(TYPES.ItemFactory)
 
         // Rooms
