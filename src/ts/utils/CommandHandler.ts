@@ -45,6 +45,7 @@ export class CommandHandler implements ICommandHandler {
 				this.outputHandler.println('ping - pong');
 				this.outputHandler.println('location - Get your current location');
 				this.outputHandler.println('observe - Observe the current location');
+				this.outputHandler.println('map - Look at the map an view recently explored rooms');
 				this.outputHandler.println('clear - Clear screen');
 				this.outputHandler.println('');
 				this.outputHandler.println('moveto <roomname> - Move to an adjacent room');
