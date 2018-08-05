@@ -54,6 +54,14 @@ export class OutputHandler implements IOutputHandler {
 		this.outputElement.appendChild(newElement);
 	}
 
+	public printLineBreak(): void {
+		if (!this.outputElement) {
+			return;
+		}
+		const newElement = document.createElement('br');
+		this.outputElement.appendChild(newElement);
+	}
+
 	/**
      * @param color
      */

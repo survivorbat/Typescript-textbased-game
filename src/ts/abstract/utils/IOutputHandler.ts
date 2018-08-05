@@ -3,6 +3,7 @@ export interface IOutputHandler {
 
 	print(text: string): void;
 	println(text: string): void;
+	printLineBreak(): void;
 
 	setNextLineTextColor(color: string): void;
 	setNextLineBackgroundColor(color: string): void;

@@ -27,6 +27,9 @@ export class CommandHandler implements ICommandHandler {
 			this.outputHandler.setNextLineTextColor(COLORS.YELLOW);
 			return this.outputHandler.println('Unknown player location');
 		}
+		this.outputHandler.printLineBreak();
+		this.outputHandler.setNextLineTextColor(COLORS.LIGHTRED);
+		this.outputHandler.println(command.commandAsText);
 		this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
 
 		switch (command.command) {
@@ -37,7 +40,6 @@ export class CommandHandler implements ICommandHandler {
 				this.outputHandler.println('---------------------------------------------');
 				this.outputHandler.println('help - Get a list of commands');
 				this.outputHandler.println('inventory - View your current inventory');
-				this.outputHandler.println('doors - Get a list adjacent rooms');
 				this.outputHandler.println('ping - pong');
 				this.outputHandler.println('location - Get your current location');
 				this.outputHandler.println('observe - Observe the current location');
@@ -76,21 +78,17 @@ export class CommandHandler implements ICommandHandler {
 				break;
 			}
 
-			// Get a list of adjacent rooms
-			case CommandType.doors: {
-				this.outputHandler.println(
-					`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`
-				);
-				this.outputHandler.setNextLineTextColor(COLORS.BLUE);
-				this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`);
-				break;
-			}
-
 			// Observe current location
 			case CommandType.observe: {
 				this.outputHandler.println(`You observe the following items:`);
 				this.outputHandler.setNextLineTextColor(COLORS.BLUE);
 				this.outputHandler.println(`${this.player.location.getItemNames()}`);
+				this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
+				this.outputHandler.println(
+					`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`
+				);
+				this.outputHandler.setNextLineTextColor(COLORS.BLUE);
+				this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`);
 				break;
 			}
 

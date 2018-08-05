@@ -3,7 +3,6 @@ import { IItem } from '../abstract/entities/IItem';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 
 export class Room implements IRoom {
-	startText?: string;
 	locked: boolean = false;
 	items: Array<IItem> = new Array<IItem>();
 
@@ -14,6 +13,7 @@ export class Room implements IRoom {
 	constructor(
 		public readonly roomCode: string,
 		public readonly roomName: string,
+		public readonly startText: string,
 		public adjacentRooms: Array<IRoom> = new Array<IRoom>()
 	) {}
 
@@ -62,7 +62,9 @@ export class Room implements IRoom {
      * @returns a string containing the room names
      */
 	getAdjacentRoomNames(): string {
-		return this.adjacentRooms.reduce((previous, current) => `${previous} ${current.roomName}`, '');
+		let result = '';
+		result = this.adjacentRooms.reduce((previous, current) => `${previous} ${current.roomName},`, '');
+		return result.trim().substring(0, result.length - 2);
 	}
 
 	/** 
@@ -77,6 +79,14 @@ export class Room implements IRoom {
      */
 	addAdjacentRoom(room: IRoom): void {
 		this.adjacentRooms.push(room);
+	}
+
+	/**
+	 * @param room to add a pathway to
+	 */
+	public addPathway(room: IRoom): void {
+		this.addAdjacentRoom(room);
+		room.addAdjacentRoom(this);
 	}
 
 	/**

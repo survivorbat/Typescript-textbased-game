@@ -59,10 +59,9 @@ export class Game {
      */
 	public run(): void {
 		Elements.inputElement.focus();
+		this.outputHandler.println('You wake up in a windowless room');
 		GameData.init(container);
 		this.player.location = GameData.START;
 		this.player.location.init(this.outputHandler);
-
-		this.outputHandler.println('You wake up in a windowless room');
 	}
 }

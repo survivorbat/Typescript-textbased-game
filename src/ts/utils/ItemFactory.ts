@@ -17,15 +17,15 @@ export class ItemFactory implements IItemFactory {
 	constructor(
 		@inject(NoUseBehaviour) readonly noUseBehaviour: IUseBehaviour,
 		@inject(NoBreakBehaviour) readonly noBreakBehaviour: IBreakBehaviour,
-        @inject(BedUseBehaviour) readonly bedUseBehaviour: IUseBehaviour,
-        @inject(ToiletUseBehaviour) readonly toiletUseBehaviour: IUseBehaviour
+		@inject(BedUseBehaviour) readonly bedUseBehaviour: IUseBehaviour,
+		@inject(ToiletUseBehaviour) readonly toiletUseBehaviour: IUseBehaviour
 	) {
-		this.items = [ 
-            new Item('Bed', bedUseBehaviour, noBreakBehaviour),
-            new Item('Toilet', toiletUseBehaviour, noBreakBehaviour),
-            new Item('Shower curtain', noUseBehaviour, noBreakBehaviour),
-            new Item('Shower head', noUseBehaviour, noBreakBehaviour) 
-        ];
+		this.items = [
+			new Item('Bed', bedUseBehaviour, noBreakBehaviour),
+			new Item('Toilet', toiletUseBehaviour, noBreakBehaviour),
+			new Item('Shower curtain', noUseBehaviour, noBreakBehaviour),
+			new Item('Shower head', noUseBehaviour, noBreakBehaviour)
+		];
 		this.randomItems = [
 			new Item('Dead Plant', noUseBehaviour, noBreakBehaviour),
 			new Item('Small table', noUseBehaviour, noBreakBehaviour),
@@ -39,12 +39,17 @@ export class ItemFactory implements IItemFactory {
 				'A cardboard box that was once used as a handy way to carry items, now it looks like it hasnt been used in years and is about to fall apart'
 			),
 			new Item('Small file cabinet', noUseBehaviour, noBreakBehaviour),
-			new Item('Radiator on the wall', noUseBehaviour, noBreakBehaviour)
+			new Item('Radiator on the wall', noUseBehaviour, noBreakBehaviour),
+			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour),
+			new Item('An empty canvas on the wall', noUseBehaviour, noBreakBehaviour),
+			new Item('A sketch painting on the wall', noUseBehaviour, noBreakBehaviour)
 		];
 	}
 
 	public getRandomItem(pickupable: boolean | null = null): IItem {
-		return this.getRandomItemFromArray(this.randomItems.filter((item: IItem) => pickupable === null || item.pickupable === pickupable));
+		return this.getRandomItemFromArray(
+			this.randomItems.filter((item: IItem) => pickupable === null || item.pickupable === pickupable)
+		);
 	}
 
 	public getItem(itemName: string): IItem {

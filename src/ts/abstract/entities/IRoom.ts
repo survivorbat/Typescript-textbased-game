@@ -1,5 +1,4 @@
 import { IItem } from './IItem';
-import { inherits } from 'util';
 import { IOutputHandler } from '../utils/IOutputHandler';
 
 export interface IRoom {
@@ -21,6 +20,7 @@ export interface IRoom {
 	getAdjacentRoomNames(): string;
 	getAmountOfAdjacentRooms(): number;
 	addAdjacentRoom(room: IRoom): void;
+	addPathway(room: IRoom): void;
 	removeAdjacentRoom(room: IRoom): void;
 	init(outputHandler: IOutputHandler): void;
 }

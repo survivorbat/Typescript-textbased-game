@@ -2,7 +2,6 @@ export enum CommandType {
 	help = 0,
 	use,
 	inventory,
-	doors,
 	ping,
 	location,
 	observe,
@@ -15,7 +14,7 @@ export enum CommandType {
 }
 
 export function getCommandTypeFromString(command: string): CommandType {
-	const commandName = command.split(' ')[0];
+	const commandName = command.split(' ')[0].toLowerCase().trim();
 	switch (commandName) {
 		case 'use':
 			return CommandType.use;
@@ -23,8 +22,6 @@ export function getCommandTypeFromString(command: string): CommandType {
 			return CommandType.help;
 		case 'inventory':
 			return CommandType.inventory;
-		case 'doors':
-			return CommandType.doors;
 		case 'ping':
 			return CommandType.ping;
 		case 'location':
