@@ -1,5 +1,7 @@
 # Typescript game
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79dacd8684654fa8b63b384c9cdacf05)](https://app.codacy.com/app/survivorbat/Typescript-textbased-game?utm_source=github.com&utm_medium=referral&utm_content=survivorbat/Typescript-textbased-game&utm_campaign=badger)
+
 A small text-based game which I develop in Typescript and Webpack. I'm trying out a few programming concepts like DI in typescript.
 
 ## Getting Started
