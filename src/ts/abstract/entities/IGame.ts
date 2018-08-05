@@ -1,3 +1,3 @@
 export interface IGame {
-    run(): void
+	run(): void;
 }

@@ -1,7 +1,7 @@
-import { CommandType } from "../../constants/CommandTypes";
+import { CommandType } from '../../constants/CommandTypes';
 
 export interface ICommand {
-    command: CommandType
-    commandAsText: string
-    arguments: string
+	command: CommandType;
+	commandAsText: string;
+	arguments: string;
 }

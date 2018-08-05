@@ -1,5 +1,5 @@
-import { ICommand } from "./ICommand";
+import { ICommand } from './ICommand';
 
 export interface ICommandHandler {
-    executeCommand(command: ICommand): void
+	executeCommand(command: ICommand): void;
 }

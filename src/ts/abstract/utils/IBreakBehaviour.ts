@@ -1,5 +1,5 @@
-import { IItem } from "../entities/IItem";
+import { IItem } from '../entities/IItem';
 
 export interface IBreakBehaviour {
-    break(item: IItem): void
+	break(item: IItem): void;
 }

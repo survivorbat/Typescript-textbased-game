@@ -12,8 +12,6 @@
     "inversify": "^4.13.0",
     "ngrock-webpack-plugin": "0.0.2",
     "node-sass": "^4.9.2",
-    "prettier": "^1.14.0",
-    "prettier-webpack-plugin": "^1.0.0",
     "reflect-metadata": "^0.1.12",
     "sass-loader": "^7.0.3",
     "source-map-loader": "^0.2.3",
