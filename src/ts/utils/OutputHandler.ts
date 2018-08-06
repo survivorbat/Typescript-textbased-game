@@ -39,6 +39,7 @@ export class OutputHandler implements IOutputHandler {
 		newElement.style.color = this.nextLineTextColor;
 		newElement.style.backgroundColor = this.nextLineBackgroundColor;
 		this.outputElement.appendChild(newElement);
+		this.scrollPageDown();
 	}
 
 	/**
@@ -55,6 +56,7 @@ export class OutputHandler implements IOutputHandler {
 		newElement.style.backgroundColor = this.nextLineBackgroundColor;
 		newElement.style.fontSize = this.nextLineFontSize;
 		this.outputElement.appendChild(newElement);
+		this.scrollPageDown();
 	}
 
 	public printLineBreak(): void {
@@ -63,6 +65,7 @@ export class OutputHandler implements IOutputHandler {
 		}
 		const newElement = document.createElement('br');
 		this.outputElement.appendChild(newElement);
+		this.scrollPageDown();
 	}
 
 	/**
@@ -108,5 +111,9 @@ export class OutputHandler implements IOutputHandler {
 			return;
 		}
 		this.outputElement.innerHTML = '';
+	}
+
+	private scrollPageDown(): void {
+		Elements.outputElement.scrollTo(0, Elements.outputElement.scrollHeight);
 	}
 }

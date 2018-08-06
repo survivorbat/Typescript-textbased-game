@@ -4,6 +4,7 @@ import { Container } from '../../../node_modules/inversify';
 import { ExpansionKit } from '../entities/specialitems/ExpansionKit';
 import { IItemFactory } from '../abstract/utils/IItemFactory';
 import { TYPES } from './Types';
+import { ItemFactory } from '../utils/ItemFactory';
 
 export class GameData {
 	public static START: IRoom;
@@ -13,56 +14,82 @@ export class GameData {
 		const itemFactory = container.get<IItemFactory>(TYPES.ItemFactory);
 
 		/* Set rooms */
-		const P1R1_BEDROOM = new Room(
-			'P1R1_START',
+		const F1_BEDROOM = new Room(
+			'F1_START',
 			'Bedroom',
 			'The bedroom is dusty and looks dilapidated, judging from the bed it looks like a bedroom'
 		);
-		const P1R2_HALLWAY = new Room(
-			'P1R2_HALLWAY',
+		const F1_HALLWAY = new Room(
+			'F1_HALLWAY',
 			'Hallway',
 			"It's a rather long rectangular hallway with brown carpet and blue walls"
 		);
-		const P1R3_STAIRS_0 = new Room(
-			'P1R3_STAIRS_0',
-			'Ground floor Stairs',
-			'A wooden staircase that creaks terribly, it allows me to access the first floor'
-		);
-		const P1R4_BATHROOM = new Room(
-			'P1R4_BATHROOM',
+		const F1_BATHROOM = new Room(
+			'F1_BATHROOM',
 			'Bathroom',
 			'This bathroom stinks terribly, there is mold all over the walls and the toilet looks disgusting'
 		);
-		const P1R5_STAIRS_1 = new Room(
-			'P1R5_STAIRS_1',
+		const F1_STAIRS = new Room(
+			'F1_STAIRS',
 			'First floor Stairs',
 			'A wooden staircase that creaks terribly, it allows me to access the second and ground floor'
 		);
-		const P1R6_STAIRS_2 = new Room(
-			'P1R6_STAIRS_2',
-			'Second floor Stairs',
-			'A wooden staircase that creaks terribly, it allows me to access the third and first floor'
-		);
-		const P1R7_HALLWAY_2 = new Room(
-			'P1R7_HALLWAY_2',
+		const F1_HALLWAY_2 = new Room(
+			'F1_HALLWAY_2',
 			'Down the hallway',
 			'This is hallway is quite long, the walls seem even more torn on at this side'
 		);
-		const P1R8_SECOND_BEDROOM = new Room(
-			'P1R8_SECOND_BEDROOM',
+		const F1_SECOND_BEDROOM = new Room(
+			'F1_SECOND_BEDROOM',
 			'Second bedroom',
 			'This second bedroom looks more dilapitated than the one I woke up in, this one smells even worse'
 		);
-		const P1R9_STUDY = new Room(
-			'P1R8_STUDY',
+		const F1_STUDY = new Room(
+			'F1_STUDY',
 			'Study',
 			'An old study room with bookcases that line the walls. There are a few books scattered around'
 		);
-		const P1R10_MUSIC = new Room(
-			'P1R10_MUSIC',
+		const F10_MUSIC = new Room(
+			'F10_MUSIC',
 			'Music room',
 			'There is a destroyed piano in the middle of the room, there is also a boarded off window'
 		);
+
+		const F2_STAIRS = new Room(
+			'F2_STAIRS',
+			'Second floor Stairs',
+			'A wooden staircase that creaks terribly, it allows me to access the third and first floor'
+		);
+		const F2_HALLWAY = new Room(
+			'F2_HALLWAY',
+			'Hallway',
+			'The second floor hallway is shorter than the other ones. The light above on the ceiling flickers and I can see three doors, one of which looks jammed'
+		);
+		const F2_CONFERENCE = new Room('F2_CONFERENCE', 'Conference room', '...');
+		const F2_GUESTBEDROOM = new Room('F2_GUESTBEDROOM', 'Guest Bedroom', '...');
+
+		const F3_STAIRS = new Room(
+			'F3_STAIRS',
+			'Third floor Stairs',
+			'A wooden staircase that creaks terribly, it allows me to access the second and top floor'
+		);
+
+		const F3_HALLWAY = new Room('F3_Hallway', 'Hallway', '...');
+		const F3_ARCHIVE = new Room('F3_ARCHIVE', 'Archive', '...');
+		const F3_STORAGEROOM = new Room('F3_STORAGEROOM', 'Storage Room', '...');
+
+		const F0_STAIRS = new Room(
+			'F0_STAIRS',
+			'Ground floor Stairs',
+			'A wooden staircase that creaks terribly, it allows me to access the first floor'
+		);
+		const F0_HALLWAY = new Room('F0_Hallway', 'Hallway', '...');
+		const F0_KITCHEN = new Room('F0_KITCHEN', 'KITCHEN', '...');
+		const F0_LIVINGROOM = new Room('F0_LIVINGROOM', 'Living Room', '...');
+		const F0_DININGROOM = new Room('F0_DININGROOM', 'Dining Room', '...');
+		const F0_GARAGE = new Room('F0_GARAGE', 'Garage', '...');
+		const F0_MAINHALL = new Room('F0_MAINHALL', 'Main hall', '...');
+		const F0_BACKGARDEN = new Room('F0_BACKGARDEN', 'Back garden', '...');
 
 		/* Items */
 		const bed = itemFactory.getItem('Bed');
@@ -70,53 +97,40 @@ export class GameData {
 		const toilet = itemFactory.getItem('Toilet');
 		const showerCurtain = itemFactory.getItem('Shower curtain');
 		const showerHead = itemFactory.getItem('Shower head');
+		const woodenDesk = itemFactory.getItem('Wooden desk');
+		const emptyBookShelf = itemFactory.getItem('Empty book shelf');
 
 		/* Add items to rooms */
-		P1R1_BEDROOM.addItem(bed);
-		P1R1_BEDROOM.addItem(itemFactory.getRandomItem());
-		P1R1_BEDROOM.addItem(itemFactory.getRandomItem());
-		P1R1_BEDROOM.addItem(backpack);
-
-		P1R2_HALLWAY.addItem(itemFactory.getRandomItem());
-		P1R2_HALLWAY.addItem(itemFactory.getRandomItem());
-		P1R2_HALLWAY.addItem(itemFactory.getRandomItem());
-
-		P1R4_BATHROOM.addItem(toilet);
-		P1R4_BATHROOM.addItem(showerCurtain);
-		P1R4_BATHROOM.addItem(showerHead);
-		P1R4_BATHROOM.addItem(itemFactory.getRandomItem());
+		F1_BEDROOM.addItem([ bed, backpack, emptyBookShelf ].concat(itemFactory.getRandomItems(3)));
+		F1_HALLWAY.addItem(itemFactory.getRandomItems(4));
+		F1_BATHROOM.addItem([ toilet, showerCurtain, showerHead ].concat(itemFactory.getRandomItems(1)));
+		F1_SECOND_BEDROOM.addItem([ bed, emptyBookShelf ].concat(itemFactory.getRandomItems(4, false)));
+		F1_HALLWAY_2.addItem(itemFactory.getRandomItems(4, false));
+		F1_STUDY.addItem([ woodenDesk, emptyBookShelf, emptyBookShelf, emptyBookShelf, emptyBookShelf ].concat(itemFactory.getRandomItems(4)));
 
 		/* Apply connections */
+		/* ######## FLOOR 0 ######## */
+		F0_STAIRS.addPathway([ F0_HALLWAY ]);
+		F0_HALLWAY.addPathway([ F0_GARAGE, F0_MAINHALL, F0_KITCHEN ]);
+		F0_KITCHEN.addPathway([ F0_LIVINGROOM, F0_DININGROOM, F0_BACKGARDEN]);
 
-		// Bedroom <-> Hallway
-		P1R1_BEDROOM.addPathway(P1R2_HALLWAY);
+		/* ######## FLOOR 1 ######## */
+		F1_HALLWAY.addPathway([ F1_BEDROOM, F1_HALLWAY_2, F1_BATHROOM, F1_STAIRS ]);
 
-		// Hallway <-> Hallway 2
-		P1R2_HALLWAY.addPathway(P1R7_HALLWAY_2);
+		F1_HALLWAY_2.addPathway([ F1_SECOND_BEDROOM, F1_STUDY, F10_MUSIC ]);
 
-		// Hallway <-> Bathroom
-		P1R2_HALLWAY.addPathway(P1R4_BATHROOM);
+		F1_STAIRS.addPathway([ F0_STAIRS, F2_STAIRS ]);
 
-		// Hallway <-> Stairs
-		P1R2_HALLWAY.addPathway(P1R5_STAIRS_1);
+		/* ######## FLOOR 2 ######## */
+		F2_STAIRS.addPathway([ F2_HALLWAY, F3_STAIRS ]);
+		F2_HALLWAY.addPathway([ F2_GUESTBEDROOM, F2_CONFERENCE ]);
 
-		// Hallway 2 <-> Second bedroom
-		P1R7_HALLWAY_2.addPathway(P1R8_SECOND_BEDROOM);
+		/* ######## FLOOR 3 ######## */
+		F3_STAIRS.addPathway([ F3_HALLWAY ]);
+		F3_HALLWAY.addPathway([ F3_ARCHIVE, F3_STORAGEROOM ]);
 
-		// Hallway 2 <-> Study
-		P1R7_HALLWAY_2.addPathway(P1R9_STUDY);
-
-		// Hallway 2 <-> Music room
-		P1R7_HALLWAY_2.addPathway(P1R10_MUSIC);
-
-		// Stairs 1 <-> Stairs 0
-		P1R5_STAIRS_1.addPathway(P1R3_STAIRS_0);
-
-		// Stairs 1 <-> Stairs 2
-		P1R5_STAIRS_1.addPathway(P1R6_STAIRS_2);
-
-		// Set static value
-		GameData.START = P1R1_BEDROOM;
+		// Set static value for starting room
+		GameData.START = F1_BEDROOM;
 	}
 }
 
@@ -124,7 +138,7 @@ export class GameData {
 /*
 								# FLOOR 3 #
 
-		???			<--->		???				<--->		???
+		Archive			<--->		Hallway			<--->		Storage
 
 									|
 									|
@@ -136,7 +150,7 @@ export class GameData {
 /*
 								# FLOOR 2 #
 
-		???			<--->		???				<--->		???
+		Conference room	<--->		Hallway			<--->		Guest bedroom
 
 									|
 									|
@@ -170,8 +184,20 @@ export class GameData {
 /* ####################################################################### */
 /*
 								# FLOOR 0 #
+									
+								Back garden
+								
+									|
+									|	
+									|	
 
-		???			<--->		???				<--->		???
+		Living Room				Kitchen				<--->		Dining room
+
+									|
+									|
+									|
+
+		Garage			<--->		Hallway				<--->		Main hall
 
 									|
 									|

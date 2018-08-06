@@ -6,10 +6,6 @@ export class Room implements IRoom {
 	locked: boolean = false;
 	items: Array<IItem> = new Array<IItem>();
 
-	/**
-     * @param roomCode Roomcode
-     * @param roomName Name of the room
-     */
 	constructor(
 		public readonly roomCode: string,
 		public readonly roomName: string,
@@ -17,84 +13,63 @@ export class Room implements IRoom {
 		public adjacentRooms: Array<IRoom> = new Array<IRoom>()
 	) {}
 
-	/**
-     * Add an item
-     * @param item Item to add
-     */
-	addItem(item: IItem): void {
-		this.items.push(item);
+	addItem(item: IItem | Array<IItem>): IRoom {
+		if(!Array.isArray(item)) {
+			this.items.push(item);
+		} else {
+			item.forEach((item: IItem) => this.addItem(item));
+		}
+		return this;
 	}
 
-	/**
-     * Remove an item
-     * @param item to be removed
-     */
-	removeItem(item: IItem): void {
+	removeItem(item: IItem): IRoom {
 		this.items = this.items.filter((roomItem: IItem) => roomItem.itemName !== item.itemName);
+		return this;
 	}
 
-	/**
-     * Get item by name or return null
-     * @param itemName to be searched for
-     * @returns item or null
-     */
 	getItemByName(itemName: string): IItem | null {
 		return this.items.filter((item: IItem) => item.itemName.toLowerCase() === itemName.toLowerCase())[0];
 	}
 
-	/**
-     * @returns list of items
-     */
 	getItemNames(): string {
 		let result = '';
 		result = this.items.reduce((previous, current) => `${previous} ${current.itemName},`, '');
 		return result.trim().substring(0, result.length - 2);
 	}
 
-	/**
-     * Initialize room
-     */
 	init(outputHandler: IOutputHandler): void {
 		outputHandler.println(`${this.startText}`);
 	}
 
-	/**
-     * @returns a string containing the room names
-     */
 	getAdjacentRoomNames(): string {
 		let result = '';
 		result = this.adjacentRooms.reduce((previous, current) => `${previous} ${current.roomName},`, '');
 		return result.trim().substring(0, result.length - 2);
 	}
 
-	/** 
-     * @returns number of adjacent rooms
-     */
 	getAmountOfAdjacentRooms(): number {
 		return this.adjacentRooms.length;
 	}
 
-	/**
-     * @param room to add
-     */
-	addAdjacentRoom(room: IRoom): void {
+	addAdjacentRoom(room: IRoom): IRoom {
 		this.adjacentRooms.push(room);
+		return this;
 	}
 
-	/**
-	 * @param room to add a pathway to
-	 */
-	public addPathway(room: IRoom): void {
-		this.addAdjacentRoom(room);
-		room.addAdjacentRoom(this);
+	addPathway(room: IRoom | Array<IRoom>): IRoom {
+		if(!Array.isArray(room)) {
+			this.addAdjacentRoom(room);
+			room.addAdjacentRoom(this);
+		} else {
+			room.forEach((room: IRoom) => this.addPathway(room))
+		}
+		return this;
 	}
 
-	/**
-     * @param room to remove
-     */
-	removeAdjacentRoom(room: IRoom): void {
+	removeAdjacentRoom(room: IRoom): IRoom {
 		this.adjacentRooms = this.adjacentRooms.filter(
 			(selectedRoom: IRoom) => selectedRoom.roomCode !== room.roomCode
 		);
+		return this;
 	}
 }

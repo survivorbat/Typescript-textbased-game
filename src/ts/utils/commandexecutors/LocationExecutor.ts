@@ -17,6 +17,7 @@ export class LocationExecutor implements ICommandExecutor {
             this.outputHandler.setNextLineTextColor(COLORS.YELLOW);
             return this.outputHandler.println('Unknown player location');
         }
+        this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
         this.outputHandler.println(`Player location:`);
         this.outputHandler.setNextLineTextColor(COLORS.BLUE);
         this.outputHandler.println(`${this.player.location.roomName}`);

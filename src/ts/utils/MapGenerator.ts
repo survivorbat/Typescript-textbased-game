@@ -4,6 +4,7 @@ import { TYPES } from '../constants/Types';
 import { IPlayer } from '../abstract/entities/IPlayer';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { IRoom } from '../abstract/entities/IRoom';
+import { COLORS } from '../constants/Colors';
 
 @injectable()
 export class MapGenerator implements IMapGenerator {
@@ -18,9 +19,11 @@ export class MapGenerator implements IMapGenerator {
 
 	private mapRoom(room: IRoom, previousRoom: IRoom | null, roomHistory: Array<IRoom>, depth: number): void {
 		if (!roomHistory.includes(room)) {
-			this.outputHandler.println(`${this.getDepth(depth)}- ???`);
+			this.outputHandler.setNextLineTextColor(COLORS.BLUE);
+			this.outputHandler.println(`${this.getDepth(depth)}|- ???`);
 		} else {
-			this.outputHandler.println(`${this.getDepth(depth)}- ${room.roomName}`);
+			this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
+			this.outputHandler.println(`${this.getDepth(depth)}|- ${room.roomName}`);
 		}
 		room.adjacentRooms.sort((a, b) => a.adjacentRooms.length - b.adjacentRooms.length).forEach((adjacentRoom: IRoom) => {
 			if (adjacentRoom === previousRoom) {
@@ -33,7 +36,7 @@ export class MapGenerator implements IMapGenerator {
 	private getDepth(depth: number): string {
 		let result: string = '';
 		for (let i: number = 0; i < depth; i++) {
-			result += '   ';
+			result += '  ';
 		}
 		return result;
 	}

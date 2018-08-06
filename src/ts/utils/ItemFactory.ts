@@ -27,13 +27,6 @@ export class ItemFactory implements IItemFactory {
 			new Item('Shower head', noUseBehaviour, noBreakBehaviour),
 			new Item('Wooden desk', noUseBehaviour, noBreakBehaviour),
 			new Item('Empty book shelf', noUseBehaviour, noBreakBehaviour),
-			new Item(
-				'Book with mold spots',
-				noUseBehaviour,
-				noBreakBehaviour,
-				true,
-				"I can't decipher what this book was once used for, it is too molded"
-			)
 		];
 		this.randomItems = [
 			new Item('Dead Plant', noUseBehaviour, noBreakBehaviour),
@@ -58,6 +51,13 @@ export class ItemFactory implements IItemFactory {
 				noBreakBehaviour,
 				true,
 				'A blank piece of paper that seems unusable, it has a lot of yellow stains on it'
+			),
+			new Item(
+				'Book with mold spots',
+				noUseBehaviour,
+				noBreakBehaviour,
+				true,
+				"I can't decipher what this book was once used for, it is too molded"
 			)
 		];
 	}
@@ -66,6 +66,10 @@ export class ItemFactory implements IItemFactory {
 		return this.getRandomItemFromArray(
 			this.randomItems.filter((item: IItem) => pickupable === null || item.pickupable === pickupable)
 		);
+	}
+
+	public getRandomItems(amount: number, pickupable: boolean | null = null): Array<IItem> {
+		return new Array(amount).map(() => this.getRandomItem(pickupable));
 	}
 
 	public getItem(itemName: string): IItem {

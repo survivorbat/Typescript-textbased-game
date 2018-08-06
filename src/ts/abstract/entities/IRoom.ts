@@ -13,14 +13,15 @@ export interface IRoom {
 	items: Array<IItem>;
 
 	toString(): string;
-	addItem(item: IItem): void;
-	removeItem(item: IItem): void;
+	addItem(item: IItem | Array<IItem>): IRoom;
+
+	removeItem(item: IItem): IRoom;
 	getItemByName(itemName: string): IItem | null;
 	getItemNames(): string;
 	getAdjacentRoomNames(): string;
 	getAmountOfAdjacentRooms(): number;
-	addAdjacentRoom(room: IRoom): void;
-	addPathway(room: IRoom): void;
-	removeAdjacentRoom(room: IRoom): void;
+	addAdjacentRoom(room: IRoom): IRoom;
+	addPathway(room: IRoom | Array<IRoom>): IRoom;
+	removeAdjacentRoom(room: IRoom): IRoom;
 	init(outputHandler: IOutputHandler): void;
 }
