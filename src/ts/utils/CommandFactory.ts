@@ -29,7 +29,7 @@ export class CommandFactory implements ICommandFactory {
 		@inject(LocationExecutor) private readonly locationExecutor: ICommandExecutor,
 		@inject(ObserveExecutor) private readonly observeExecutor: ICommandExecutor,
 		@inject(MapExecutor) private readonly mapExecutor: ICommandExecutor,
-		@inject(MoveToExecutor) private readonly moveToExecutor: ICommandExecutor,
+		@inject(MoveToExecutor) private readonly movetoExecutor: ICommandExecutor,
 		@inject(ClearExecutor) private readonly clearExecutor: ICommandExecutor,
 		@inject(UseExecutor) private readonly useExecutor: ICommandExecutor,
 		@inject(DropExecutor) private readonly dropExecutor: ICommandExecutor,
