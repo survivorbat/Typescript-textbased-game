@@ -35,7 +35,7 @@ export class InputHandler implements IInputHandler {
 	}
 
 	public addCommand(input: string): void {
-		this.inputBuffer.push(this.commandFactory.getCommandFromString(input));
+		this.inputBuffer.push(this.commandFactory.getCommandFromString(input.trim().toLowerCase()));
 		this.commandHistory.push(input);
 		this._commandHistoryPosition = this.commandHistory.length;
 	}

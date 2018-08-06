@@ -33,7 +33,7 @@ export class CommandFactory implements ICommandFactory {
 		@inject(UseExecutor) private readonly useExecutor: ICommandExecutor,
 		@inject(DropExecutor) private readonly dropExecutor: ICommandExecutor,
 		@inject(PickupExecutor) private readonly pickupExecutor: ICommandExecutor,
-		@inject(InfoExecutor) private readonly infoExecutor: ICommandExecutor,
+		@inject(InfoExecutor) private readonly infoExecutor: ICommandExecutor
 	) {}
 
 	getCommandFromString(command: string): ICommand {
@@ -43,45 +43,22 @@ export class CommandFactory implements ICommandFactory {
 		delete commandArray[0];
 		const commandArguments = commandArray.join(' ');
 
-		switch (commandNoun) {
-			case CommandType.ping.name:
-			case CommandType.ping.shortcut:
-				return new Command(commandArguments, this.pingExecutor, command);
-			case CommandType.help.name:
-			case CommandType.help.shortcut:
-				return new Command(commandArguments, this.helpExecutor, command);
-			case CommandType.inventory.name:
-			case CommandType.inventory.shortcut:
-				return new Command(commandArguments, this.inventoryExecutor, command);
-			case CommandType.observe.name:
-			case CommandType.observe.shortcut:
-				return new Command(commandArguments, this.observeExecutor, command);
-			case CommandType.location.name:
-			case CommandType.location.shortcut:
-				return new Command(commandArguments, this.locationExecutor, command);
-			case CommandType.map.name:
-			case CommandType.map.shortcut:
-				return new Command(commandArguments, this.mapExecutor, command);
-			case CommandType.moveto.name:
-			case CommandType.moveto.shortcut:
-				return new Command(commandArguments, this.moveToExecutor, command);
-			case CommandType.clear.name:
-			case CommandType.clear.shortcut:
-				return new Command(commandArguments, this.clearExecutor, command);
-			case CommandType.pickup.name:
-			case CommandType.pickup.shortcut:
-				return new Command(commandArguments, this.pickupExecutor, command);
-			case CommandType.use.name:
-			case CommandType.use.shortcut:
-				return new Command(commandArguments, this.useExecutor, command);
-			case CommandType.drop.name:
-			case CommandType.drop.shortcut:
-				return new Command(commandArguments, this.dropExecutor, command);
-			case CommandType.drop.name:
-			case CommandType.drop.shortcut:
-				return new Command(commandArguments, this.infoExecutor, command);
-			default:
-				return new Command(commandArguments, this.unknownCommandExecutor, command);
-		}
+		let returnCommand: ICommand | null = null;
+
+		Object.keys(CommandType).forEach((commandType: any) => {
+			if (
+				(<any>CommandType)[commandType].name == commandNoun ||
+				(<any>CommandType)[commandType].shortcut == commandNoun
+			) {
+				returnCommand = new Command(
+					commandArguments,
+					(<any>this)[(<any>CommandType)[commandType].name + 'Executor'],
+					command
+				);
+				return;
+			}
+		});
+
+		return returnCommand || new Command(commandArguments, this.unknownCommandExecutor, command);
 	}
 }
