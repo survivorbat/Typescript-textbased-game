@@ -2,11 +2,15 @@ import { ICommand } from '../abstract/utils/ICommand';
 import { ICommandExecutor } from '../abstract/utils/ICommandExecutor';
 
 export class Command implements ICommand {
+	private readonly useValue: string
+
 	constructor(
-		private readonly useValue: string, 
+		useValue: string, 
 		private readonly useExecutor: ICommandExecutor,
 		public readonly commandAsText: string = ""
-	) { }
+	) { 
+		this.useValue = useValue.trim().toLowerCase()
+	}
 
 	public execute() {
 		this.useExecutor.execute(this.useValue)
