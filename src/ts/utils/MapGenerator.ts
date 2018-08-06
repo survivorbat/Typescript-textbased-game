@@ -22,7 +22,7 @@ export class MapGenerator implements IMapGenerator {
 		} else {
 			this.outputHandler.println(`${this.getDepth(depth)}- ${room.roomName}`);
 		}
-		room.adjacentRooms.forEach((adjacentRoom: IRoom) => {
+		room.adjacentRooms.sort((a, b) => a.adjacentRooms.length - b.adjacentRooms.length).forEach((adjacentRoom: IRoom) => {
 			if (adjacentRoom === previousRoom) {
 				return;
 			}
