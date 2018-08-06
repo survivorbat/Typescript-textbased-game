@@ -16,6 +16,7 @@ import { UseExecutor } from './commandexecutors/UseExecutor';
 import { DropExecutor } from './commandexecutors/DropExecutor';
 import { PickupExecutor } from './commandexecutors/PickupExecutor';
 import { InfoExecutor } from './commandexecutors/InfoExecutor';
+import { CommandType } from '../constants/CommandTypes';
 
 @injectable()
 export class CommandFactory implements ICommandFactory {
@@ -43,41 +44,41 @@ export class CommandFactory implements ICommandFactory {
 		const commandArguments = commandArray.join(' ');
 
 		switch (commandNoun) {
-			case 'ping':
-			case 'p':
+			case CommandType.ping.name:
+			case CommandType.ping.shortcut:
 				return new Command(commandArguments, this.pingExecutor, command);
-			case 'help':
-			case 'h':
+			case CommandType.help.name:
+			case CommandType.help.shortcut:
 				return new Command(commandArguments, this.helpExecutor, command);
-			case 'inventory':
-			case 'inv':
+			case CommandType.inventory.name:
+			case CommandType.inventory.shortcut:
 				return new Command(commandArguments, this.inventoryExecutor, command);
-			case 'observe':
-			case 'o':
+			case CommandType.observe.name:
+			case CommandType.observe.shortcut:
 				return new Command(commandArguments, this.observeExecutor, command);
-			case 'location':
-			case 'l':
+			case CommandType.location.name:
+			case CommandType.location.shortcut:
 				return new Command(commandArguments, this.locationExecutor, command);
-			case 'map':
-			case 'm':
+			case CommandType.map.name:
+			case CommandType.map.shortcut:
 				return new Command(commandArguments, this.mapExecutor, command);
-			case 'moveto':
-			case 'mt':
+			case CommandType.moveto.name:
+			case CommandType.moveto.shortcut:
 				return new Command(commandArguments, this.moveToExecutor, command);
-			case 'clear':
-			case 'c':
+			case CommandType.clear.name:
+			case CommandType.clear.shortcut:
 				return new Command(commandArguments, this.clearExecutor, command);
-			case 'pickup':
-			case 'pu':
+			case CommandType.pickup.name:
+			case CommandType.pickup.shortcut:
 				return new Command(commandArguments, this.pickupExecutor, command);
-			case 'use':
-			case 'u':
+			case CommandType.use.name:
+			case CommandType.use.shortcut:
 				return new Command(commandArguments, this.useExecutor, command);
-			case 'drop':
-			case 'd':
+			case CommandType.drop.name:
+			case CommandType.drop.shortcut:
 				return new Command(commandArguments, this.dropExecutor, command);
-			case 'info':
-			case 'inf':
+			case CommandType.drop.name:
+			case CommandType.drop.shortcut:
 				return new Command(commandArguments, this.infoExecutor, command);
 			default:
 				return new Command(commandArguments, this.unknownCommandExecutor, command);

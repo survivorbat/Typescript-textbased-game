@@ -5,7 +5,6 @@ import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 import { COLORS } from '../../constants/Colors';
 import { IPlayer } from '../../abstract/entities/IPlayer';
 import { IItem } from '../../abstract/entities/IItem';
-import { ExpansionKit } from '../../entities/specialitems/ExpansionKit';
 
 @injectable()
 export class InfoExecutor implements ICommandExecutor {
