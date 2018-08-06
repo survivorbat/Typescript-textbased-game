@@ -16,7 +16,8 @@ import { UseExecutor } from './commandexecutors/UseExecutor';
 import { DropExecutor } from './commandexecutors/DropExecutor';
 import { PickupExecutor } from './commandexecutors/PickupExecutor';
 import { InfoExecutor } from './commandexecutors/InfoExecutor';
-import { CommandType } from '../constants/CommandTypes';
+import { ICommandType } from '../abstract/utils/ICommandType';
+import { CommandTypes } from '../constants/CommandTypes';
 
 @injectable()
 export class CommandFactory implements ICommandFactory {
@@ -45,17 +46,9 @@ export class CommandFactory implements ICommandFactory {
 
 		let returnCommand: ICommand | null = null;
 
-		Object.keys(CommandType).forEach((commandType: any) => {
-			if (
-				(<any>CommandType)[commandType].name == commandNoun ||
-				(<any>CommandType)[commandType].shortcut == commandNoun
-			) {
-				returnCommand = new Command(
-					commandArguments,
-					(<any>this)[(<any>CommandType)[commandType].name + 'Executor'],
-					command
-				);
-				return;
+		CommandTypes.forEach((commandType: ICommandType) => {
+			if (commandType.name == commandNoun || commandType.shortcut == commandNoun) {
+				returnCommand = new Command(commandArguments, (<any>this)[commandType.name + 'Executor'], command);
 			}
 		});
 
