@@ -5151,7 +5151,7 @@ var MapGenerator = (function () {
         else {
             this.outputHandler.println(this.getDepth(depth) + "- " + room.roomName);
         }
-        room.adjacentRooms.forEach(function (adjacentRoom) {
+        room.adjacentRooms.sort(function (a, b) { return a.adjacentRooms.length - b.adjacentRooms.length; }).forEach(function (adjacentRoom) {
             if (adjacentRoom === previousRoom) {
                 return;
             }
@@ -6020,4 +6020,4 @@ exports.UseExecutor = UseExecutor;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.ad3c5240187bcc9284a8.js.map
+//# sourceMappingURL=main.f4553d2b2bc26c9506f5.js.map
