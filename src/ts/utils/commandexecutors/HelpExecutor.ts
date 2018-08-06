@@ -3,7 +3,8 @@ import { inject, injectable } from '../../../../node_modules/inversify';
 import { TYPES } from '../../constants/Types';
 import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 import { COLORS } from '../../constants/Colors';
-import { CommandType } from '../../constants/CommandTypes';
+import { CommandTypes } from '../../constants/CommandTypes';
+import { ICommandType } from '../../abstract/utils/ICommandType';
 
 @injectable()
 export class HelpExecutor implements ICommandExecutor {
@@ -13,9 +14,8 @@ export class HelpExecutor implements ICommandExecutor {
 		this.outputHandler.println('Available commands:');
 		this.outputHandler.setNextLineTextColor(COLORS.BLUE);
 		this.outputHandler.println('---------------------------------------------');
-		Object.keys(CommandType).forEach((key: string) => {
-			const command = (<any>CommandType)[key];
-			this.outputHandler.println(`${command.name} / ${command.shortcut} - ${command.description}`);
+		CommandTypes.forEach((commandType: ICommandType) => {
+			this.outputHandler.println(`${commandType.name} / ${commandType.shortcut} - ${commandType.description}`);
 		});
 		this.outputHandler.println('---------------------------------------------');
 	}

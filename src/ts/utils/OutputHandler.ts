@@ -10,6 +10,8 @@ export class OutputHandler implements IOutputHandler {
 
 	private nextLineBackgroundColor: string = 'rgb(0,10,0)';
 
+	private nextLineFontSize: string = '1em';
+
 	constructor() {
 		this.outputElement = Elements.outputElement;
 		if (!Elements.inputElement || !Elements.outputElement) {
@@ -51,6 +53,7 @@ export class OutputHandler implements IOutputHandler {
 		newElement.textContent = `> ${text}`;
 		newElement.style.color = this.nextLineTextColor;
 		newElement.style.backgroundColor = this.nextLineBackgroundColor;
+		newElement.style.fontSize = this.nextLineFontSize;
 		this.outputElement.appendChild(newElement);
 	}
 
@@ -80,21 +83,21 @@ export class OutputHandler implements IOutputHandler {
      * @param color
      */
 	public setContainerTextColor(color: string): void {
-		throw new Error('Method not implemented.');
+		Elements.outputElement.style.color = color;
 	}
 
 	/**
      * @param color
      */
 	public setContainerBackgroundColor(color: string): void {
-		throw new Error('Method not implemented.');
+		Elements.outputElement.style.backgroundColor = color;
 	}
 
 	/**
      * @param size of the text
      */
 	public setNextLineFontSize(size: string): void {
-		throw new Error('Method not implemented.');
+		Elements.outputElement.style.fontSize = size;
 	}
 
 	/**
