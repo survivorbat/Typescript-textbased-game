@@ -77,7 +77,7 @@ export class CommandFactory implements ICommandFactory {
 			case 'd':
 				return new Command(commandArguments, this.dropExecutor, command);
 			case 'info':
-			case 'i':
+			case 'inf':
 				return new Command(commandArguments, this.infoExecutor, command);
 			default:
 				return new Command(commandArguments, this.unknownCommandExecutor, command);
