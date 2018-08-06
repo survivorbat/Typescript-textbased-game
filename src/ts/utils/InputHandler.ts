@@ -3,7 +3,6 @@ import { ICommand } from '../abstract/utils/ICommand';
 import { injectable, inject } from '../../../node_modules/inversify';
 import { TYPES } from '../constants/types';
 import { ICommandFactory } from '../abstract/utils/ICommandFactory';
-import { privateEncrypt } from 'crypto';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { COLORS } from '../constants/Colors';
 

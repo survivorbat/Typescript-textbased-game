@@ -4,7 +4,6 @@ import { IInputHandler } from '../abstract/utils/IInputHandler';
 import { inject, injectable } from '../../../node_modules/inversify';
 import { TYPES } from '../constants/Types';
 import { IPlayer } from '../abstract/entities/IPlayer';
-import { Command } from '../utils/Command';
 import { GameData } from '../constants/GameData';
 import { container } from '../inversify.config';
 

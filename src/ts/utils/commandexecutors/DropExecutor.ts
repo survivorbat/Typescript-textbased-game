@@ -4,7 +4,6 @@ import { TYPES } from '../../constants/Types';
 import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 import { COLORS } from '../../constants/Colors';
 import { IPlayer } from '../../abstract/entities/IPlayer';
-import { getRandomCanNotPickupMessage } from '../../constants/Messages';
 import { IItem } from '../../abstract/entities/IItem';
 
 @injectable()

@@ -2,7 +2,6 @@ import { ICommandExecutor } from "../../abstract/utils/ICommandExecutor";
 import { inject, injectable } from "../../../../node_modules/inversify";
 import { TYPES } from "../../constants/Types";
 import { IOutputHandler } from "../../abstract/utils/IOutputHandler";
-import { COLORS } from "../../constants/Colors";
 import { IRoomManager } from "../../abstract/utils/IRoomManager";
 
 @injectable()
