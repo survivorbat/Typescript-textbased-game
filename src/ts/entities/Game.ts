@@ -49,7 +49,7 @@ export class Game {
 			}
 		});
 
-		Elements.outputElement.addEventListener('click', (event: Event) => {
+		Elements.outputElement.addEventListener('click', () => {
 			Elements.inputElement.focus();
 		});
 	}

@@ -48,7 +48,7 @@ export class CommandFactory implements ICommandFactory {
 
 		CommandTypes.forEach((commandType: ICommandType) => {
 			if (commandType.name == commandNoun || commandType.shortcut == commandNoun) {
-				returnCommand = new Command(commandArguments, (<any>this)[commandType.name + 'Executor'], command);
+				returnCommand = new Command(commandArguments, this[commandType.name + 'Executor'], command);
 			}
 		});
 
