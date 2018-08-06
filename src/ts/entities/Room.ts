@@ -13,12 +13,13 @@ export class Room implements IRoom {
 		public adjacentRooms: Array<IRoom> = new Array<IRoom>()
 	) {}
 
-	addItem(item: IItem | Array<IItem>): IRoom {
-		if(!Array.isArray(item)) {
-			this.items.push(item);
-		} else {
-			item.forEach((item: IItem) => this.addItem(item));
-		}
+	addItem(item: IItem): IRoom {
+		this.items.push(item);
+		return this;
+	}
+
+	addItems(items: Array<IItem>): IRoom {
+		items.forEach((item: IItem) => this.addItem(item));
 		return this;
 	}
 
@@ -56,13 +57,14 @@ export class Room implements IRoom {
 		return this;
 	}
 
-	addPathway(room: IRoom | Array<IRoom>): IRoom {
-		if(!Array.isArray(room)) {
-			this.addAdjacentRoom(room);
-			room.addAdjacentRoom(this);
-		} else {
-			room.forEach((room: IRoom) => this.addPathway(room))
-		}
+	addPathway(room: IRoom): IRoom {
+		this.addAdjacentRoom(room);
+		room.addAdjacentRoom(this);
+		return this;
+	}
+
+	addPathways(rooms: Array<IRoom>): IRoom {
+		rooms.forEach((room: IRoom) => this.addPathway(room));
 		return this;
 	}
 

@@ -13,7 +13,8 @@ export interface IRoom {
 	items: Array<IItem>;
 
 	toString(): string;
-	addItem(item: IItem | Array<IItem>): IRoom;
+	addItem(item: IItem): IRoom;
+	addItems(items: Array<IItem>): IRoom;
 
 	removeItem(item: IItem): IRoom;
 	getItemByName(itemName: string): IItem | null;
@@ -21,7 +22,10 @@ export interface IRoom {
 	getAdjacentRoomNames(): string;
 	getAmountOfAdjacentRooms(): number;
 	addAdjacentRoom(room: IRoom): IRoom;
-	addPathway(room: IRoom | Array<IRoom>): IRoom;
+
+	addPathway(room: IRoom): IRoom;
+	addPathways(rooms: Array<IRoom>): IRoom;
+
 	removeAdjacentRoom(room: IRoom): IRoom;
 	init(outputHandler: IOutputHandler): void;
 }

@@ -101,12 +101,12 @@ export class GameData {
 		const emptyBookShelf = itemFactory.getItem('Empty book shelf');
 
 		/* Add items to rooms */
-		F1_BEDROOM.addItem([ bed, backpack, emptyBookShelf ].concat(itemFactory.getRandomItems(3)));
-		F1_HALLWAY.addItem(itemFactory.getRandomItems(4));
-		F1_BATHROOM.addItem([ toilet, showerCurtain, showerHead ].concat(itemFactory.getRandomItems(1)));
-		F1_SECOND_BEDROOM.addItem([ bed, emptyBookShelf ].concat(itemFactory.getRandomItems(4, false)));
-		F1_HALLWAY_2.addItem(itemFactory.getRandomItems(4, false));
-		F1_STUDY.addItem(
+		F1_BEDROOM.addItems([ bed, backpack, emptyBookShelf ].concat(itemFactory.getRandomItems(3)));
+		F1_HALLWAY.addItems(itemFactory.getRandomItems(4));
+		F1_BATHROOM.addItems([ toilet, showerCurtain, showerHead ].concat(itemFactory.getRandomItems(1)));
+		F1_SECOND_BEDROOM.addItems([ bed, emptyBookShelf ].concat(itemFactory.getRandomItems(4, false)));
+		F1_HALLWAY_2.addItems(itemFactory.getRandomItems(4, false));
+		F1_STUDY.addItems(
 			[ woodenDesk, emptyBookShelf, emptyBookShelf, emptyBookShelf, emptyBookShelf ].concat(
 				itemFactory.getRandomItems(4)
 			)
@@ -114,24 +114,24 @@ export class GameData {
 
 		/* Apply connections */
 		/* ######## FLOOR 0 ######## */
-		F0_STAIRS.addPathway([ F0_HALLWAY ]);
-		F0_HALLWAY.addPathway([ F0_GARAGE, F0_MAINHALL, F0_KITCHEN ]);
-		F0_KITCHEN.addPathway([ F0_LIVINGROOM, F0_DININGROOM, F0_BACKGARDEN ]);
+		F0_STAIRS.addPathways([ F0_HALLWAY ]);
+		F0_HALLWAY.addPathways([ F0_GARAGE, F0_MAINHALL, F0_KITCHEN ]);
+		F0_KITCHEN.addPathways([ F0_LIVINGROOM, F0_DININGROOM, F0_BACKGARDEN ]);
 
 		/* ######## FLOOR 1 ######## */
-		F1_HALLWAY.addPathway([ F1_BEDROOM, F1_HALLWAY_2, F1_BATHROOM, F1_STAIRS ]);
+		F1_HALLWAY.addPathways([ F1_BEDROOM, F1_HALLWAY_2, F1_BATHROOM, F1_STAIRS ]);
 
-		F1_HALLWAY_2.addPathway([ F1_SECOND_BEDROOM, F1_STUDY, F10_MUSIC ]);
+		F1_HALLWAY_2.addPathways([ F1_SECOND_BEDROOM, F1_STUDY, F10_MUSIC ]);
 
-		F1_STAIRS.addPathway([ F0_STAIRS, F2_STAIRS ]);
+		F1_STAIRS.addPathways([ F0_STAIRS, F2_STAIRS ]);
 
 		/* ######## FLOOR 2 ######## */
-		F2_STAIRS.addPathway([ F2_HALLWAY, F3_STAIRS ]);
-		F2_HALLWAY.addPathway([ F2_GUESTBEDROOM, F2_CONFERENCE ]);
+		F2_STAIRS.addPathways([ F2_HALLWAY, F3_STAIRS ]);
+		F2_HALLWAY.addPathways([ F2_GUESTBEDROOM, F2_CONFERENCE ]);
 
 		/* ######## FLOOR 3 ######## */
-		F3_STAIRS.addPathway([ F3_HALLWAY ]);
-		F3_HALLWAY.addPathway([ F3_ARCHIVE, F3_STORAGEROOM ]);
+		F3_STAIRS.addPathways([ F3_HALLWAY ]);
+		F3_HALLWAY.addPathways([ F3_ARCHIVE, F3_STORAGEROOM ]);
 
 		// Set static value for starting room
 		GameData.START = F1_BEDROOM;
