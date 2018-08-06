@@ -8,7 +8,8 @@ const TYPES = {
 	RoomManager: Symbol.for('RoomManager'),
 	CommandHandler: Symbol.for('CommandHandler'),
 	ItemFactory: Symbol.for('ItemFactory'),
-	MapGenerator: Symbol.for('MapGenerator')
+	MapGenerator: Symbol.for('MapGenerator'),
+	CommandFactory: Symbol.for('CommandFactory')
 };
 
 export { TYPES };

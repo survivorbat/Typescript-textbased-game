@@ -50,18 +50,18 @@ module.exports = {
 		}),
 		new ExtractTextPlugin({ filename: 'static/css/[name].[hash].css' }),
 		new CleanWebpackPlugin('dist'),
-		new UglifyJsPlugin({
-			uglifyOptions: {
-				ecma: 8,
-				output: {
-					comments: false,
-					beautify: false
-				},
-				ie8: true,
-				safari10: true
-			},
-			sourceMap: true
-		}),
+		// new UglifyJsPlugin({
+		// 	uglifyOptions: {
+		// 		ecma: 8,
+		// 		output: {
+		// 			comments: false,
+		// 			beautify: false
+		// 		},
+		// 		ie8: true,
+		// 		safari10: true
+		// 	},
+		// 	sourceMap: true
+		// }),
 		new NgrockWebpackPlugin()
 	]
 };

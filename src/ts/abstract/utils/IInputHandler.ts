@@ -1,11 +1,8 @@
-import { ICommand } from './ICommand';
-import { IOutputHandler } from './IOutputHandler';
-
 export interface IInputHandler {
 	commandHistoryPosition: number;
 
-	addCommand(input: ICommand): void;
+	addCommand(input: string): void;
 	clearBuffer(): void;
 	execute(): void;
-	getCommand(position: number): ICommand;
+	getCommand(position: number): string;
 }

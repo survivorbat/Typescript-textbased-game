@@ -29,7 +29,7 @@ export class Game {
 	private registerHandlers() {
 		Elements.inputElement.addEventListener('keypress', (event: KeyboardEvent) => {
 			if (event.keyCode === 13) {
-				this.inputHandler.addCommand(new Command(Elements.inputElement.value));
+				this.inputHandler.addCommand(Elements.inputElement.value);
 				this.inputHandler.execute();
 				Elements.inputElement.value = '';
 			}
@@ -39,11 +39,11 @@ export class Game {
 			if (event.keyCode === 38) {
 				Elements.inputElement.value = this.inputHandler.getCommand(
 					this.inputHandler.commandHistoryPosition - 1
-				).commandAsText;
+				);
 			} else if (event.keyCode === 40) {
 				Elements.inputElement.value = this.inputHandler.getCommand(
 					this.inputHandler.commandHistoryPosition + 1
-				).commandAsText;
+				);
 			} else if (event.keyCode === 27) {
 				Elements.inputElement.value = '';
 			}
