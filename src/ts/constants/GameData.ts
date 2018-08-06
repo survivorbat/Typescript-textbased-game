@@ -31,7 +31,7 @@ export class GameData {
 		);
 		const F1_STAIRS = new Room(
 			'F1_STAIRS',
-			'First floor Stairs',
+			'Stairs 1',
 			'A wooden staircase that creaks terribly, it allows me to access the second and ground floor'
 		);
 		const F1_HALLWAY_2 = new Room(
@@ -57,7 +57,7 @@ export class GameData {
 
 		const F2_STAIRS = new Room(
 			'F2_STAIRS',
-			'Second floor Stairs',
+			'Stairs 2',
 			'A wooden staircase that creaks terribly, it allows me to access the third and first floor'
 		);
 		const F2_HALLWAY = new Room(
@@ -70,7 +70,7 @@ export class GameData {
 
 		const F3_STAIRS = new Room(
 			'F3_STAIRS',
-			'Third floor Stairs',
+			'Stairs 3',
 			'A wooden staircase that creaks terribly, it allows me to access the second and top floor'
 		);
 
@@ -80,7 +80,7 @@ export class GameData {
 
 		const F0_STAIRS = new Room(
 			'F0_STAIRS',
-			'Ground floor Stairs',
+			'Stairs 0',
 			'A wooden staircase that creaks terribly, it allows me to access the first floor'
 		);
 		const F0_HALLWAY = new Room('F0_Hallway', 'Hallway', '...');
@@ -106,13 +106,17 @@ export class GameData {
 		F1_BATHROOM.addItem([ toilet, showerCurtain, showerHead ].concat(itemFactory.getRandomItems(1)));
 		F1_SECOND_BEDROOM.addItem([ bed, emptyBookShelf ].concat(itemFactory.getRandomItems(4, false)));
 		F1_HALLWAY_2.addItem(itemFactory.getRandomItems(4, false));
-		F1_STUDY.addItem([ woodenDesk, emptyBookShelf, emptyBookShelf, emptyBookShelf, emptyBookShelf ].concat(itemFactory.getRandomItems(4)));
+		F1_STUDY.addItem(
+			[ woodenDesk, emptyBookShelf, emptyBookShelf, emptyBookShelf, emptyBookShelf ].concat(
+				itemFactory.getRandomItems(4)
+			)
+		);
 
 		/* Apply connections */
 		/* ######## FLOOR 0 ######## */
 		F0_STAIRS.addPathway([ F0_HALLWAY ]);
 		F0_HALLWAY.addPathway([ F0_GARAGE, F0_MAINHALL, F0_KITCHEN ]);
-		F0_KITCHEN.addPathway([ F0_LIVINGROOM, F0_DININGROOM, F0_BACKGARDEN]);
+		F0_KITCHEN.addPathway([ F0_LIVINGROOM, F0_DININGROOM, F0_BACKGARDEN ]);
 
 		/* ######## FLOOR 1 ######## */
 		F1_HALLWAY.addPathway([ F1_BEDROOM, F1_HALLWAY_2, F1_BATHROOM, F1_STAIRS ]);
