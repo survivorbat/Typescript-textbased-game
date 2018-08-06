@@ -4721,9 +4721,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Command = (function () {
     function Command(useValue, useExecutor, commandAsText) {
         if (commandAsText === void 0) { commandAsText = ""; }
-        this.useValue = useValue;
         this.useExecutor = useExecutor;
         this.commandAsText = commandAsText;
+        this.useValue = useValue.trim().toLowerCase();
     }
     Command.prototype.execute = function () {
         this.useExecutor.execute(this.useValue);
@@ -5783,9 +5783,17 @@ var ObserveExecutor = (function () {
         this.player = player;
     }
     ObserveExecutor.prototype.execute = function () {
-        this.outputHandler.println("Inventory (" + this.player.inventoryManager.getAmountOfItems() + "/" + this.player.inventoryManager.getMaxItems() + "):");
+        if (!this.player.location) {
+            this.outputHandler.setNextLineTextColor(Colors_1.COLORS.YELLOW);
+            return this.outputHandler.println('Unknown player location');
+        }
+        this.outputHandler.println("You observe the following items:");
         this.outputHandler.setNextLineTextColor(Colors_1.COLORS.BLUE);
-        this.outputHandler.println("" + this.player.inventoryManager.toString());
+        this.outputHandler.println("" + this.player.location.getItemNames());
+        this.outputHandler.setNextLineTextColor(Colors_1.COLORS.LIGHTGREEN);
+        this.outputHandler.println("There are " + this.player.location.getAmountOfAdjacentRooms() + " doors that lead to:");
+        this.outputHandler.setNextLineTextColor(Colors_1.COLORS.BLUE);
+        this.outputHandler.println("" + this.player.location.getAdjacentRoomNames());
     };
     ObserveExecutor = __decorate([
         inversify_1.injectable(),
@@ -6012,4 +6020,4 @@ exports.UseExecutor = UseExecutor;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.6c4c29f84818832009f6.js.map
+//# sourceMappingURL=main.ad3c5240187bcc9284a8.js.map
