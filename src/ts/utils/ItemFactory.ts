@@ -8,6 +8,7 @@ import { IBreakBehaviour } from '../abstract/utils/IBreakBehaviour';
 import { BedUseBehaviour } from '../entities/ItemBehaviour/BedUseBehaviour';
 import { Item } from '../entities/Item';
 import { ToiletUseBehaviour } from '../entities/ItemBehaviour/ToiletUseBehaviour';
+import { DefaultBreakBehaviour } from '../entities/ItemBehaviour/DefaultBreakBehaviour';
 
 @injectable()
 export class ItemFactory implements IItemFactory {
@@ -18,7 +19,8 @@ export class ItemFactory implements IItemFactory {
 		@inject(NoUseBehaviour) readonly noUseBehaviour: IUseBehaviour,
 		@inject(NoBreakBehaviour) readonly noBreakBehaviour: IBreakBehaviour,
 		@inject(BedUseBehaviour) readonly bedUseBehaviour: IUseBehaviour,
-		@inject(ToiletUseBehaviour) readonly toiletUseBehaviour: IUseBehaviour
+		@inject(ToiletUseBehaviour) readonly toiletUseBehaviour: IUseBehaviour,
+		@inject(DefaultBreakBehaviour) readonly defaultBreakBehaviour: IBreakBehaviour
 	) {
 		this.items = [
 			new Item('Bed', bedUseBehaviour, noBreakBehaviour),
@@ -44,18 +46,18 @@ export class ItemFactory implements IItemFactory {
 			new Item('Radiator on the wall', noUseBehaviour, noBreakBehaviour),
 			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour, true, 'Some wooden parts'),
 			new Item('An empty canvas on the wall', noUseBehaviour, noBreakBehaviour),
-			new Item('Sketch painting on the wall', noUseBehaviour, noBreakBehaviour),
+			new Item('Sketch painting on the wall', noUseBehaviour, defaultBreakBehaviour),
 			new Item(
 				'Piece of paper with yellow stains',
 				noUseBehaviour,
-				noBreakBehaviour,
+				defaultBreakBehaviour,
 				true,
 				'A blank piece of paper that seems unusable, it has a lot of yellow stains on it'
 			),
 			new Item(
 				'Book with mold spots',
 				noUseBehaviour,
-				noBreakBehaviour,
+				defaultBreakBehaviour,
 				true,
 				"I can't decipher what this book was once used for, it is too molded"
 			)
