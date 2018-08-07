@@ -38,7 +38,7 @@ export class ItemFactory implements IItemFactory {
 			new Item(
 				'A cardboard box',
 				noUseBehaviour,
-				noBreakBehaviour,
+				defaultBreakBehaviour,
 				true,
 				'A cardboard box that was once used as a handy way to carry items, now it looks like it hasnt been used in years and is about to fall apart'
 			),
