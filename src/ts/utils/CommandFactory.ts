@@ -42,7 +42,7 @@ export class CommandFactory implements ICommandFactory {
 		const commandNoun = commandArray[0];
 
 		delete commandArray[0];
-		const commandArguments = commandArray.join(' ');
+		const commandArguments = commandArray.join(' ').trim().toLocaleLowerCase();
 
 		let returnCommand: ICommand | null = null;
 

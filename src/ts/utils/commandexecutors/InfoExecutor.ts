@@ -20,9 +20,9 @@ export class InfoExecutor implements ICommandExecutor {
 		}
 
 		const object: IItem | null =
-			this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName === argument)[0] || null;
+			this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === argument)[0] || null;
 		if (object) {
-			return object.use();
+			return this.outputHandler.println(object.info || "");
 		}
 		return this.outputHandler.println('Object not found');
 	}

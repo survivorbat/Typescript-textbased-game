@@ -29,7 +29,7 @@ export class Room implements IRoom {
 	}
 
 	getItemByName(itemName: string): IItem | null {
-		return this.items.filter((item: IItem) => item.itemName.toLowerCase() === itemName.toLowerCase())[0];
+		return this.items.filter((item: IItem) => item.itemName.toLowerCase().trim() === itemName.toLowerCase().trim())[0];
 	}
 
 	getItemNames(): string {
