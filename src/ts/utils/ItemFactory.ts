@@ -69,7 +69,7 @@ export class ItemFactory implements IItemFactory {
 	}
 
 	public getRandomItems(amount: number, pickupable: boolean | null = null): Array<IItem> {
-		return new Array(amount).map(() => this.getRandomItem(pickupable));
+		return new Array(amount).fill(null).map(() => this.getRandomItem(pickupable));
 	}
 
 	public getItem(itemName: string): IItem {
