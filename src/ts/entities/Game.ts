@@ -1,11 +1,13 @@
+import 'reflect-metadata';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { Elements } from '../elements/elements';
 import { IInputHandler } from '../abstract/utils/IInputHandler';
 import { inject, injectable } from '../../../node_modules/inversify';
-import { TYPES } from '../constants/Types';
+import { TYPES } from '../constants/DependencyTypes';
 import { IPlayer } from '../abstract/entities/IPlayer';
 import { GameData } from '../constants/GameData';
 import { container } from '../inversify.config';
+import { COLORS } from '../constants/Colors';
 
 @injectable()
 export class Game {
@@ -58,7 +60,7 @@ export class Game {
      */
 	public run(): void {
 		Elements.inputElement.focus();
-		this.outputHandler.println('You wake up in a windowless room');
+		this.outputHandler.println('You wake up in a windowless room', COLORS.LIGHTGREEN);
 		GameData.init(container);
 		this.player.location = GameData.START;
 		this.player.location.init(this.outputHandler);

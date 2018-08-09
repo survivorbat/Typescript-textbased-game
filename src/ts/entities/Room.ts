@@ -1,6 +1,7 @@
 import { IRoom } from '../abstract/entities/IRoom';
 import { IItem } from '../abstract/entities/IItem';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
+import { COLORS } from '../constants/Colors';
 
 export class Room implements IRoom {
 	locked: boolean = false;
@@ -43,7 +44,7 @@ export class Room implements IRoom {
 	}
 
 	init(outputHandler: IOutputHandler): void {
-		outputHandler.println(`${this.startText}`);
+		outputHandler.println(`${this.startText}`, COLORS.LIGHTGREEN);
 	}
 
 	getAdjacentRoomNames(): string {

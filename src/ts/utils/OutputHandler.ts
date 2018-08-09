@@ -46,13 +46,13 @@ export class OutputHandler implements IOutputHandler {
      * @param code that needs to be displayed
      * @param text line of text that needs to be printed
      */
-	public println(text: string): void {
+	public println(text: string, color: string | null = null): void {
 		if (!this.outputElement) {
 			return;
 		}
 		let newElement = document.createElement('div');
 		newElement.textContent = `> ${text}`;
-		newElement.style.color = this.nextLineTextColor;
+		newElement.style.color = color || this.nextLineTextColor;
 		newElement.style.backgroundColor = this.nextLineBackgroundColor;
 		newElement.style.fontSize = this.nextLineFontSize;
 		this.outputElement.appendChild(newElement);

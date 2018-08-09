@@ -1,6 +1,6 @@
 import { ICommandExecutor } from '../../abstract/utils/ICommandExecutor';
 import { inject, injectable } from '../../../../node_modules/inversify';
-import { TYPES } from '../../constants/Types';
+import { TYPES } from '../../constants/DependencyTypes';
 import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 import { COLORS } from '../../constants/Colors';
 import { IPlayer } from '../../abstract/entities/IPlayer';
@@ -21,8 +21,7 @@ export class ObserveExecutor implements ICommandExecutor {
 
 	execute(): void {
 		if (!this.player.location) {
-			this.outputHandler.setNextLineTextColor(COLORS.YELLOW);
-			return this.outputHandler.println('Unknown player location');
+			return this.outputHandler.println('Unknown player location', COLORS.YELLOW);
 		}
 
 		// Get displayer
@@ -50,9 +49,10 @@ export class ObserveExecutor implements ICommandExecutor {
 		// Print another line
 		this.outputHandler.println(roomDisplayer.getRow('-'));
 
-		this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
-		this.outputHandler.println(`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`);
-		this.outputHandler.setNextLineTextColor(COLORS.BLUE);
-		this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`);
+		this.outputHandler.println(
+			`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`,
+			COLORS.LIGHTGREEN
+		);
+		this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`, COLORS.BLUE);
 	}
 }

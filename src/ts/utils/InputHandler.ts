@@ -1,7 +1,7 @@
 import { IInputHandler } from '../abstract/utils/IInputHandler';
 import { ICommand } from '../abstract/utils/ICommand';
 import { injectable, inject } from '../../../node_modules/inversify';
-import { TYPES } from '../constants/types';
+import { TYPES } from '../constants/DependencyTypes';
 import { ICommandFactory } from '../abstract/utils/ICommandFactory';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { COLORS } from '../constants/Colors';
@@ -55,9 +55,7 @@ export class InputHandler implements IInputHandler {
 	public execute(): void {
 		this.inputBuffer.forEach((command: ICommand) => {
 			this.outputHandler.printLineBreak();
-			this.outputHandler.setNextLineTextColor(COLORS.LIGHTRED);
-			this.outputHandler.println(command.commandAsText);
-			this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
+			this.outputHandler.println(command.commandAsText, COLORS.LIGHTRED);
 			command.execute();
 		});
 		if (this.shouldAutoClearBuffer) {

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import { TYPES } from './constants/types';
+import { TYPES } from './constants/DependencyTypes';
 import { IOutputHandler } from './abstract/utils/IOutputHandler';
 import { OutputHandler } from './utils/OutputHandler';
 import { IInputHandler } from './abstract/utils/IInputHandler';

@@ -1,11 +1,12 @@
 import { IInventoryManager } from '../abstract/utils/IInventoryManager';
 import { IInventory } from '../abstract/entities/IInventory';
 import { inject } from 'inversify';
-import { TYPES } from '../constants/Types';
+import { TYPES } from '../constants/DependencyTypes';
 import { injectable } from '../../../node_modules/inversify';
 import { IItem } from '../abstract/entities/IItem';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { ExpansionKit } from '../entities/specialitems/ExpansionKit';
+import { COLORS } from '../constants/Colors';
 
 @injectable()
 export class InventoryManager implements IInventoryManager {
@@ -78,7 +79,10 @@ export class InventoryManager implements IInventoryManager {
      * @param item to be consumed
      */
 	consumeExpansionPack(expansionKit: ExpansionKit) {
-		this.outputHandler.println(`You equipped a backpack, you now have ${expansionKit.size} more inventory slots`);
+		this.outputHandler.println(
+			`You equipped a backpack, you now have ${expansionKit.size} more inventory slots`,
+			COLORS.LIGHTGREEN
+		);
 		this.setMaxItems(this.getMaxItems() + expansionKit.size);
 		this.removeItem(expansionKit);
 	}

@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import { Room } from '../entities/Room';
 import { IRoom } from '../abstract/entities/IRoom';
 import { Container } from '../../../node_modules/inversify';
 import { ExpansionKit } from '../entities/specialitems/ExpansionKit';
 import { IItemFactory } from '../abstract/utils/IItemFactory';
-import { TYPES } from './Types';
-import { ItemFactory } from '../utils/ItemFactory';
+import { TYPES } from './DependencyTypes';
 
 export class GameData {
 	public static START: IRoom;
@@ -17,7 +17,9 @@ export class GameData {
 		const F1_BEDROOM = new Room(
 			'F1_START',
 			'Bedroom',
-			'The bedroom is dusty and looks dilapidated, judging from the bed it looks like a bedroom'
+			'The bedroom is dusty and looks dilapidated, judging from the bed it looks like a bedroom',
+			8,
+			7
 		);
 		const F1_HALLWAY = new Room(
 			'F1_HALLWAY',

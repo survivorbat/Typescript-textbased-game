@@ -1,6 +1,6 @@
 import { ICommandExecutor } from '../../abstract/utils/ICommandExecutor';
 import { inject, injectable } from '../../../../node_modules/inversify';
-import { TYPES } from '../../constants/Types';
+import { TYPES } from '../../constants/DependencyTypes';
 import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 
 @injectable()

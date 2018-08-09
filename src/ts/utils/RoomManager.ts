@@ -2,7 +2,7 @@ import { injectable, inject } from '../../../node_modules/inversify';
 import { IRoomManager } from '../abstract/utils/IRoomManager';
 import { IRoom } from '../abstract/entities/IRoom';
 import { IPlayer } from '../abstract/entities/IPlayer';
-import { TYPES } from '../constants/Types';
+import { TYPES } from '../constants/DependencyTypes';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 
 @injectable()

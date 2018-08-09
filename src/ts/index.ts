@@ -1,8 +1,9 @@
+import 'reflect-metadata';
 import '../styles/index.scss';
 import { Game } from './entities/Game';
 import { Elements } from './elements/elements';
 import { container } from './inversify.config';
-import { TYPES } from './constants/Types';
+import { TYPES } from './constants/DependencyTypes';
 
 // Set elements
 const outputElement = <HTMLElement>document.querySelector('#gamearea');

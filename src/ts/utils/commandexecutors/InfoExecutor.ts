@@ -1,6 +1,6 @@
 import { ICommandExecutor } from '../../abstract/utils/ICommandExecutor';
 import { inject, injectable } from '../../../../node_modules/inversify';
-import { TYPES } from '../../constants/Types';
+import { TYPES } from '../../constants/DependencyTypes';
 import { IOutputHandler } from '../../abstract/utils/IOutputHandler';
 import { COLORS } from '../../constants/Colors';
 import { IPlayer } from '../../abstract/entities/IPlayer';
@@ -15,14 +15,15 @@ export class InfoExecutor implements ICommandExecutor {
 
 	execute(argument: string): void {
 		if (!this.player.location) {
-			this.outputHandler.setNextLineTextColor(COLORS.YELLOW);
-			return this.outputHandler.println('Unknown player location');
+			return this.outputHandler.println('Unknown player location', COLORS.YELLOW);
 		}
 
 		const object: IItem | null =
-			this.player.inventoryManager.getItems().filter((item: IItem) => item.itemName.trim().toLowerCase() === argument)[0] || null;
+			this.player.inventoryManager
+				.getItems()
+				.filter((item: IItem) => item.itemName.trim().toLowerCase() === argument)[0] || null;
 		if (object) {
-			return this.outputHandler.println(object.info || "");
+			return this.outputHandler.println(object.info || '');
 		}
 		return this.outputHandler.println('Object not found');
 	}

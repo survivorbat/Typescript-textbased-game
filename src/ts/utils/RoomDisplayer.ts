@@ -18,11 +18,11 @@ export class RoomDisplayer implements IRoomDisplayer {
 		let row = new Array(this.width * this.sizeMultiplier - 2).fill(' ');
 		// If object is not empty, replace a random part with the word
 		if (objectName) {
-			row[1 + Math.floor(Math.random() * this.width * this.sizeMultiplier - 2 - objectName.length)] = objectName;
+			row[this.getPositivePosition(row, objectName)] = objectName;
 		}
 
 		// Return the row
-		return '|' + row.join('').substring(0, this.width * this.sizeMultiplier - 2) + '|';
+		return '|' + row.join('').substring(0, row.length) + '|';
 	}
 
 	getRowWithNameCentered(name: string): string {
@@ -30,5 +30,13 @@ export class RoomDisplayer implements IRoomDisplayer {
 			this.getRow(' ').substring(0, this.width * this.sizeMultiplier / 2 - name.length / 2) +
 			name.toLocaleUpperCase()
 		);
+	}
+
+	private getPositivePosition(row: Array<string>, objectName: string): number {
+		let position = -1;
+		while (position <= 0) {
+			position = 1 + Math.floor(Math.random() * row.length - objectName.length);
+		}
+		return position;
 	}
 }

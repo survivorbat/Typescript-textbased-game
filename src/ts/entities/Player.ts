@@ -1,7 +1,7 @@
 import { IPlayer } from '../abstract/entities/IPlayer';
 import { injectable, inject } from '../../../node_modules/inversify';
 import { IRoom } from '../abstract/entities/IRoom';
-import { TYPES } from '../constants/Types';
+import { TYPES } from '../constants/DependencyTypes';
 import { IInventoryManager } from '../abstract/utils/IInventoryManager';
 import { IItem } from '../abstract/entities/IItem';
 
@@ -11,9 +11,7 @@ export class Player implements IPlayer {
 	private _location?: IRoom;
 	public roomsVisited: Array<IRoom> = new Array<IRoom>();
 
-	constructor(
-		@inject(TYPES.InventoryManager) public readonly inventoryManager: IInventoryManager
-	) {}
+	constructor(@inject(TYPES.InventoryManager) public readonly inventoryManager: IInventoryManager) {}
 
 	public pickupItem(item: IItem): boolean {
 		return this.inventoryManager.addItem(item);

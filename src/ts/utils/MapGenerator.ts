@@ -1,6 +1,6 @@
 import { injectable, inject } from '../../../node_modules/inversify';
 import { IMapGenerator } from '../abstract/utils/IMapGenerator';
-import { TYPES } from '../constants/Types';
+import { TYPES } from '../constants/DependencyTypes';
 import { IPlayer } from '../abstract/entities/IPlayer';
 import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 import { IRoom } from '../abstract/entities/IRoom';
@@ -19,18 +19,18 @@ export class MapGenerator implements IMapGenerator {
 
 	private mapRoom(room: IRoom, previousRoom: IRoom | null, roomHistory: Array<IRoom>, depth: number): void {
 		if (!roomHistory.includes(room)) {
-			this.outputHandler.setNextLineTextColor(COLORS.BLUE);
-			this.outputHandler.println(`${this.getDepth(depth)}|- ???`);
+			this.outputHandler.println(`${this.getDepth(depth)}|- ???`, COLORS.BLUE);
 		} else {
-			this.outputHandler.setNextLineTextColor(COLORS.LIGHTGREEN);
-			this.outputHandler.println(`${this.getDepth(depth)}|- ${room.roomName}`);
+			this.outputHandler.println(`${this.getDepth(depth)}|- ${room.roomName}`, COLORS.LIGHTGREEN);
 		}
-		room.adjacentRooms.sort((a, b) => a.adjacentRooms.length - b.adjacentRooms.length).forEach((adjacentRoom: IRoom) => {
-			if (adjacentRoom === previousRoom) {
-				return;
-			}
-			this.mapRoom(adjacentRoom, room, roomHistory, depth + 1);
-		});
+		room.adjacentRooms
+			.sort((a, b) => a.adjacentRooms.length - b.adjacentRooms.length)
+			.forEach((adjacentRoom: IRoom) => {
+				if (adjacentRoom === previousRoom) {
+					return;
+				}
+				this.mapRoom(adjacentRoom, room, roomHistory, depth + 1);
+			});
 	}
 
 	private getDepth(depth: number): string {
