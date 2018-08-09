@@ -26,7 +26,6 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "start:live": "webpack-dev-server -d --progress --port=8080 --hot --inline --config=webpack.config.js",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -d dist"

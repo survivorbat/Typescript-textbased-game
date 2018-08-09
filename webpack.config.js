@@ -42,12 +42,6 @@ module.exports = {
 			}
 		]
 	},
-	devServer: {
-		headers: { 'Access-Control-Allow-Origin': '*' },
-		historyApiFallback: {
-			index: 'http://localhost:8080/index.html'
-		}
-	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
@@ -66,7 +60,6 @@ module.exports = {
 				safari10: true
 			},
 			sourceMap: true
-		}),
-		new NgrockWebpackPlugin()
+		})
 	]
 };
