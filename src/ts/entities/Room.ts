@@ -5,13 +5,17 @@ import { IOutputHandler } from '../abstract/utils/IOutputHandler';
 export class Room implements IRoom {
 	locked: boolean = false;
 	items: Array<IItem> = new Array<IItem>();
+	adjacentRooms: Array<IRoom>;
 
 	constructor(
 		public readonly roomCode: string,
 		public readonly roomName: string,
 		public readonly startText: string,
-		public adjacentRooms: Array<IRoom> = new Array<IRoom>()
-	) {}
+		public readonly height: number = 10,
+		public readonly width: number = 10
+	) {
+		this.adjacentRooms = new Array<IRoom>()
+	}
 
 	addItem(item: IItem): IRoom {
 		this.items.push(item);

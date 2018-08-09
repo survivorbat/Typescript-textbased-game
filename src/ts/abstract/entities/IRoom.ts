@@ -6,6 +6,9 @@ export interface IRoom {
 	roomName: string;
 	startText?: string;
 
+	width: number;
+	height: number;
+
 	adjacentRooms: Array<IRoom>;
 
 	locked: boolean;
