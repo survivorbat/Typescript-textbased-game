@@ -24,7 +24,7 @@ export class RoomDisplayer implements IRoomDisplayer {
 		let result: string = '|' + row.join('').substring(0, row.length) + '|';
 
 		if (adjacentRoomName) {
-			result += ` ==> ${adjacentRoomName}`;
+			result += ` => ${adjacentRoomName}`;
 		}
 		// Return the row
 		return result;

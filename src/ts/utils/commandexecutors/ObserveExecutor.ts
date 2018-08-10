@@ -29,7 +29,7 @@ export class ObserveExecutor implements ICommandExecutor {
 
 		// Print line with name of the room in the middle in uppercase
 		this.outputHandler.println(roomDisplayer.getRowWithNameCentered(this.player.location.roomName));
-		this.outputHandler.println(roomDisplayer.getRow('-'), COLORS.LIGHTGREEN);
+		this.outputHandler.println(roomDisplayer.getRow('-') + ' LEADS TO:', COLORS.LIGHTGREEN);
 
 		// Get items
 		let items: Array<string> = this.player.location.items.map((item: IItem) => item.itemName);
