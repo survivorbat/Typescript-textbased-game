@@ -4,7 +4,7 @@ body {
   font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace; }
 
 #gamearea {
-  height: 70vh;
+  height: 80vh;
   overflow-y: auto; }
   #gamearea div,
   #gamearea span {
@@ -31,4 +31,4 @@ body {
     #inputarea input:focus {
       outline: none; }
 
-/*# sourceMappingURL=main.2432017a6a7c0d5781fa.css.map*/
+/*# sourceMappingURL=main.948c1cd4a225b9936093.css.map*/
