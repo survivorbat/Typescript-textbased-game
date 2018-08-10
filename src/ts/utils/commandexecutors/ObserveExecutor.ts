@@ -29,7 +29,7 @@ export class ObserveExecutor implements ICommandExecutor {
 
 		// Print line with name of the room in the middle in uppercase
 		this.outputHandler.println(roomDisplayer.getRowWithNameCentered(this.player.location.roomName));
-		this.outputHandler.println(roomDisplayer.getRow('-'));
+		this.outputHandler.println(roomDisplayer.getRow('-'), COLORS.LIGHTGREEN);
 
 		// Get items
 		let items: Array<string> = this.player.location.items.map((item: IItem) => item.itemName);
@@ -43,16 +43,13 @@ export class ObserveExecutor implements ICommandExecutor {
 
 		// For each row print an item or just print an empty row
 		for (let i: number = 0; i < this.player.location.height; i++) {
-			this.outputHandler.println(roomDisplayer.getRowWithItemName(items[i]));
+			this.outputHandler.println(
+				roomDisplayer.getRowWithItemName(items[i], (this.player.location.adjacentRooms[i] || {}).roomName),
+				COLORS.LIGHTGREEN
+			);
 		}
 
 		// Print another line
-		this.outputHandler.println(roomDisplayer.getRow('-'));
-
-		this.outputHandler.println(
-			`There are ${this.player.location.getAmountOfAdjacentRooms()} doors that lead to:`,
-			COLORS.LIGHTGREEN
-		);
-		this.outputHandler.println(`${this.player.location.getAdjacentRoomNames()}`, COLORS.BLUE);
+		this.outputHandler.println(roomDisplayer.getRow('-'), COLORS.LIGHTGREEN);
 	}
 }

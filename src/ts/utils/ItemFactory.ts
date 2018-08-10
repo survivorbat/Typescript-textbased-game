@@ -28,39 +28,21 @@ export class ItemFactory implements IItemFactory {
 			new Item('Shower curtain', noUseBehaviour, noBreakBehaviour),
 			new Item('Shower head', noUseBehaviour, noBreakBehaviour),
 			new Item('Wooden desk', noUseBehaviour, noBreakBehaviour),
-			new Item('Empty book shelf', noUseBehaviour, noBreakBehaviour),
+			new Item('Empty book shelf', noUseBehaviour, noBreakBehaviour)
 		];
 		this.randomItems = [
 			new Item('Dead Plant', noUseBehaviour, noBreakBehaviour),
 			new Item('Small table', noUseBehaviour, noBreakBehaviour),
 			new Item('Broken lamp', noUseBehaviour, noBreakBehaviour),
 			new Item('A large pile of dust', noUseBehaviour, noBreakBehaviour),
-			new Item(
-				'A cardboard box',
-				noUseBehaviour,
-				defaultBreakBehaviour,
-				true,
-				'A cardboard box that was once used as a handy way to carry items, now it looks like it hasnt been used in years and is about to fall apart'
-			),
+			new Item('A cardboard box', noUseBehaviour, defaultBreakBehaviour, true),
 			new Item('Small file cabinet', noUseBehaviour, noBreakBehaviour),
 			new Item('Radiator on the wall', noUseBehaviour, noBreakBehaviour),
-			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour, true, 'Some wooden parts'),
+			new Item('Remains of a painting', noUseBehaviour, noBreakBehaviour, true),
 			new Item('An empty canvas on the wall', noUseBehaviour, noBreakBehaviour),
 			new Item('Sketch painting on the wall', noUseBehaviour, defaultBreakBehaviour),
-			new Item(
-				'Piece of paper with yellow stains',
-				noUseBehaviour,
-				defaultBreakBehaviour,
-				true,
-				'A blank piece of paper that seems unusable, it has a lot of yellow stains on it'
-			),
-			new Item(
-				'Book with mold spots',
-				noUseBehaviour,
-				defaultBreakBehaviour,
-				true,
-				"I can't decipher what this book was once used for, it is too molded"
-			)
+			new Item('Piece of paper with yellow stains', noUseBehaviour, defaultBreakBehaviour, true),
+			new Item('Book with mold spots', noUseBehaviour, defaultBreakBehaviour, true)
 		];
 	}
 

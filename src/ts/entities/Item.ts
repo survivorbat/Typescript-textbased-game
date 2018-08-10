@@ -7,8 +7,7 @@ export class Item implements IItem {
 		public readonly itemName: string,
 		private readonly useBehaviour: IUseBehaviour,
 		private readonly breakBehaviour: IBreakBehaviour,
-		public readonly pickupable: boolean = false,
-		public readonly info: string = ''
+		public readonly pickupable: boolean = false
 	) {}
 
 	public use(): void {

@@ -3,6 +3,6 @@ export interface IRoomDisplayer {
 	height: number;
 	sizeMultiplier: number;
 	getRow(symbol: string): string;
-	getRowWithItemName(objectName: string): string;
+	getRowWithItemName(objectName: string, adjacentRoomName?: string | null): string;
 	getRowWithNameCentered(name: string): string;
 }

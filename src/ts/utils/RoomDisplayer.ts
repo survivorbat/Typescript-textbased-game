@@ -13,7 +13,7 @@ export class RoomDisplayer implements IRoomDisplayer {
 		return new Array(this.width * this.sizeMultiplier).fill(symbol).join('');
 	}
 
-	getRowWithItemName(objectName: string): string {
+	getRowWithItemName(objectName: string, adjacentRoomName: string | null = null): string {
 		// Get an empty row
 		let row = new Array(this.width * this.sizeMultiplier - 2).fill(' ');
 		// If object is not empty, replace a random part with the word
@@ -21,8 +21,13 @@ export class RoomDisplayer implements IRoomDisplayer {
 			row[this.getPositivePosition(row, objectName)] = objectName;
 		}
 
+		let result: string = '|' + row.join('').substring(0, row.length) + '|';
+
+		if (adjacentRoomName) {
+			result += ` ==> ${adjacentRoomName}`;
+		}
 		// Return the row
-		return '|' + row.join('').substring(0, row.length) + '|';
+		return result;
 	}
 
 	getRowWithNameCentered(name: string): string {
